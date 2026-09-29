@@ -1,152 +1,466 @@
-/* --- TEMA LIGHT (Alb și Verde) --- */
-:root {
-  --bg-color: #f4f7f5;
-  --card-bg: #ffffff;
-  --text-primary: #1b2e21;
-  --text-secondary: #55755e;
-  --accent-green: #2d6a4f;
-  --accent-green-hover: #1b4332;
-  --border-color: #d8e2dc;
-  --nav-bg: #ffffff;
+/* =========================================================================
+   ReviveBooks — Editorial Thrift-Store Design System
+   ========================================================================= */
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+blockquote {
+  margin: 0;
+}
+ul,
+ol {
+  padding: 0;
+  list-style: none;
+}
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
 }
 
-/* --- TEMA DARK (Negru complet + verde deschis) --- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-color: #000000;
-    --card-bg: #121f17;
-    --text-primary: #b7e4c7;
-    --text-secondary: #74c69d;
-    --accent-green: #52b788;
-    --accent-green-hover: #74c69d;
-    --border-color: #1b4332;
-    --nav-bg: #080f0c;
-  }
+/* ---------- Tokens: Editorial Thrift ---------- */
+:root {
+  /* Warm paper palette */
+  --cream: #f2e7ce;
+  --cream-deep: #ead9b3;
+  --paper: #fbf5e2;
+  --paper-hover: #f7eed3;
+  --ink: #1d2e23;
+  --ink-soft: #3b4a3f;
+  --ink-mute: #6b7867;
+  --ink-faint: #8b9686;
+
+  /* Forest green from logo */
+  --forest: #0f3d2c;
+  --forest-deep: #082818;
+  --forest-tint: rgba(15, 61, 44, 0.08);
+  --forest-line: rgba(15, 61, 44, 0.18);
+
+  /* Editorial accents */
+  --rust: #b85c3a;
+  --rust-deep: #8f4423;
+  --ochre: #d9a441;
+  --ochre-deep: #b7861f;
+  --plum: #7a3f52;
+
+  /* System */
+  --line: rgba(29, 46, 35, 0.14);
+  --line-strong: rgba(29, 46, 35, 0.28);
+  --shadow-sm: 0 2px 0 var(--forest-line);
+  --shadow-md: 0 14px 30px -18px rgba(15, 61, 44, 0.32);
+  --shadow-lg: 0 28px 60px -30px rgba(15, 61, 44, 0.35);
+
+  /* Type */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-hand: "Caveat", "Bradley Hand", cursive;
+
+  /* Layout */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  background-color: var(--cream);
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(217, 164, 65, 0.09), transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(184, 92, 58, 0.07), transparent 40%),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.18 0 0 0 0 0.14 0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- COMPORTAMENT PENTRU TELEFON (Sub 768px) --- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  font-optical-sizing: auto;
+}
+
+/* Selection */
+::selection {
+  background: var(--ochre);
+  color: var(--forest-deep);
+}
+
+/* ---------- App shell (mobile-first) ---------- */
 .app-container {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
-  padding-bottom: 90px; /* Asigură spațiu jos pentru meniu */
+  padding-bottom: 92px;
 }
 
-/* Ascundem bara de sus pe telefon */
+.page-content {
+  flex: 1;
+  padding: 18px 18px 30px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* ---------- Desktop nav (hidden on mobile) ---------- */
 .desktop-navbar {
   display: none;
 }
 
-/* Bara de jos fixată corect pe ecranul telefonului */
+/* ---------- Bottom nav (mobile) ---------- */
 .bottom-nav {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: var(--nav-bg);
-  border-top: 1px solid var(--border-color);
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  background: var(--forest);
+  color: var(--paper);
+  border: 1px solid var(--forest-deep);
+  border-radius: var(--radius-pill);
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
-  z-index: 9999; /* Forțăm să fie deasupra elementelor */
+  align-items: center;
+  padding: 10px 8px;
+  z-index: 9999;
+  box-shadow: 0 18px 40px -18px rgba(15, 61, 44, 0.55);
 }
 
 .nav-item {
-  text-decoration: none;
-  color: var(--text-secondary);
-  font-size: 0.75rem;
+  color: rgba(251, 245, 226, 0.72);
+  font-size: 0.72rem;
+  font-weight: 500;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 3px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  transition: color 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.02em;
 }
 
 .nav-item svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.7;
 }
 
-.nav-item.router-link-exact-active {
-  color: var(--accent-green);
-  font-weight: bold;
+.nav-item.router-link-exact-active,
+.nav-item.router-link-active {
+  color: var(--ochre);
 }
 
-/* --- COMPORTAMENT PENTRU LAPTOP (Peste 768px) --- */
-@media (min-width: 768px) {
+.nav-item.router-link-exact-active svg,
+.nav-item.router-link-active svg {
+  stroke: var(--ochre);
+}
+
+/* ---------- Desktop layout (>= 900px) ---------- */
+@media (min-width: 900px) {
   .app-container {
-    max-width: 100% !important;
     padding-bottom: 40px;
   }
 
-  /* Ascundem bara de jos pe laptop */
   .bottom-nav {
     display: none;
   }
 
-  /* Activăm bara de sus pe laptop */
   .desktop-navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 50px;
-    background-color: var(--nav-bg);
-    border-bottom: 1px solid var(--border-color);
+    display: block;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
     position: sticky;
     top: 0;
     z-index: 1000;
   }
 
+  .navbar-content {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 14px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+  }
+
   .desktop-logo {
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: var(--accent-green);
+    display: flex;
+    align-items: center;
+    gap: 12px;
     text-decoration: none;
+  }
+
+  .brand-logo-img {
+    height: 54px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .brand-wordmark {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+  }
+
+  .brand-wordmark .brand-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.55rem;
+    color: var(--forest);
+    letter-spacing: -0.02em;
+  }
+
+  .brand-wordmark .brand-name em {
+    font-style: italic;
+    color: var(--rust);
+    font-weight: 500;
+  }
+
+  .brand-wordmark .brand-tag {
+    font-family: var(--font-hand);
+    font-size: 1rem;
+    color: var(--ink-mute);
+    margin-top: 2px;
   }
 
   .desktop-menu {
     display: flex;
-    gap: 40px;
+    gap: 34px;
+    align-items: center;
   }
 
   .desktop-link {
-    text-decoration: none;
-    color: var(--text-secondary);
+    position: relative;
+    font-family: var(--font-display);
+    font-size: 1.02rem;
     font-weight: 500;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.2s;
+    color: var(--ink-soft);
+    padding: 4px 2px;
+    transition: color 0.2s ease;
   }
 
-  .desktop-link svg {
-    width: 20px;
-    height: 20px;
+  .desktop-link:hover {
+    color: var(--forest);
   }
 
-  .desktop-link.router-link-exact-active {
-    color: var(--accent-green);
-    font-weight: bold;
+  .desktop-link.router-link-exact-active,
+  .desktop-link.router-link-active {
+    color: var(--forest);
+    font-weight: 700;
   }
-}
 
-/* Conținut pagini */
-.page-content {
-  padding: 16px;
-  flex: 1;
-}
+  .desktop-link.router-link-exact-active::after,
+  .desktop-link.router-link-active::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    right: -4px;
+    bottom: -6px;
+    height: 7px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12' preserveAspectRatio='none'><path d='M2 8 Q30 2 60 6 T118 4' fill='none' stroke='%23b85c3a' stroke-width='2.4' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
 
-@media (min-width: 768px) {
   .page-content {
-    padding: 40px 60px;
+    padding: 40px 56px 72px;
   }
+}
+
+/* ---------- Shared component: Buttons ---------- */
+.vinted-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--forest);
+  color: var(--paper);
+  border: 1px solid var(--forest-deep);
+  padding: 11px 22px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  text-decoration: none;
+  box-shadow: 0 2px 0 var(--forest-deep);
+}
+
+.vinted-btn-primary:hover {
+  background: var(--forest-deep);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -10px rgba(15, 61, 44, 0.55);
+}
+
+.vinted-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 0 var(--forest-deep);
+}
+
+.vinted-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: transparent;
+  border: 1.5px solid var(--forest);
+  color: var(--forest);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.vinted-btn-outline:hover {
+  background: var(--forest);
+  color: var(--paper);
+}
+
+.vinted-btn-outline:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ---------- Shared component: Chip ---------- */
+.vinted-chip {
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.18s ease;
+}
+
+.vinted-chip:hover {
+  background: var(--paper-hover);
+  border-color: var(--forest);
+  color: var(--forest);
+}
+
+.vinted-chip.active {
+  background: var(--forest);
+  color: var(--paper);
+  border-color: var(--forest);
+  font-weight: 600;
+}
+
+/* ---------- Shared: form fields ---------- */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+select,
+textarea {
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  transition: border-color 0.18s ease, background 0.18s ease;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--forest);
+  background: #fff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ink-faint);
+}
+
+/* ---------- Section eyebrow + hand-drawn underline ---------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: var(--rust);
+  transform: rotate(-2deg);
+  margin-bottom: 6px;
+}
+
+.hand-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.hand-underline::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  bottom: -10px;
+  height: 10px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'><path d='M2 8 Q50 1 100 6 T198 4' fill='none' stroke='%23b85c3a' stroke-width='2.8' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }

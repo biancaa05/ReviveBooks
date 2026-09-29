@@ -13,6 +13,10 @@
         </div>
       </div>
 
+      <div class="header-book-info">
+        <span>Carte: <strong>{{ book.title }}</strong></span>
+      </div>
+
       <!-- Butonul / Statusul de Livrare -->
       <div class="delivery-status-container">
         <button 
@@ -20,12 +24,8 @@
           :class="{ 'ready': myDeliveryReady }"
           @click="toggleDeliveryReady"
         >
-          📦 Gata de livrare ({{ deliveryCount }}/2)
+          Gata de livrare ({{ deliveryCount }}/2)
         </button>
-      </div>
-
-      <div class="header-book-info">
-        <span>Carte: <strong>{{ book.title }}</strong></span>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
     <!-- Modal / Ecran de Livrare detaliat -->
     <div class="delivery-modal-overlay" v-if="showDeliveryScreen">
       <div class="delivery-modal-content">
-        <h2>🚀 Detalii Livrare & Colet</h2>
+        <h2>Detalii Livrare & Colet</h2>
         <p class="delivery-subtitle">Ambele părți au confirmat schimbul pentru <strong>„{{ book.title }}”</strong>. Completează adresa completă de expediere:</p>
 
         <div class="delivery-form-grid">

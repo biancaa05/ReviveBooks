@@ -1,8 +1,8 @@
 <template>
   <div class="premium-page">
     <div class="premium-hero">
-      <h1>✨ ReviveBooks Premium</h1>
-      <p>Deblochează avantaje exclusive și scoate cărțile în evidență!</p>
+      <h1>ReviveBooks <em>Premium</em></h1>
+      <p>Deblochează avantaje exclusive și scoate cărțile tale în lumina reflectoarelor.</p>
     </div>
 
     <div class="premium-cards-grid">

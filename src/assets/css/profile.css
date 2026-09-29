@@ -1,227 +1,335 @@
+/* Profile — editorial identity page */
 .profile-main-page {
   width: 100%;
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding-bottom: 40px;
+  gap: 24px;
 }
 
-/* Cardul scurt și lat de profil (Sus) */
+/* Banner card */
 .profile-banner-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 16px 24px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 22px 26px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-banner-card::before {
+  content: "";
+  position: absolute;
+  right: -60px;
+  top: -60px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--ochre) 0%, transparent 70%);
+  opacity: 0.15;
+  pointer-events: none;
 }
 
 .profile-banner-card:hover {
-  border-color: #043c25;
-  box-shadow: 0 4px 12px rgba(4, 60, 37, 0.05);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--forest-line);
 }
 
 .banner-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 18px;
+  flex: 1;
+  min-width: 220px;
 }
 
 .profile-avatar-med {
-  width: 50px;
-  height: 50px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   flex-shrink: 0;
+  border: 3px solid var(--paper);
+  box-shadow: 0 0 0 2px var(--forest-line);
 }
 
 .banner-info h2 {
-  margin: 0 0 2px 0;
-  font-size: 1.1rem;
-  color: #111827;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
 }
 
 .banner-info p {
-  margin: 0;
-  font-size: 0.85rem;
-  color: #6b7280;
+  font-size: 0.9rem;
+  color: var(--ink-mute);
+  font-family: var(--font-hand);
+  font-size: 1rem;
 }
 
 .banner-action-hint {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #043c25;
-  background: rgba(4, 60, 37, 0.08);
-  padding: 6px 12px;
-  border-radius: 20px;
+  color: var(--forest);
+  background: var(--forest-tint);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  border: 1px solid var(--forest-line);
+  z-index: 1;
 }
 
-/* Secțiunea de Subpagini plasată dedesubt */
+/* Sub-links */
 .section-title {
-  font-size: 1rem;
-  color: #374151;
-  margin: 10px 0 0 0;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink);
+  margin-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed var(--line-strong);
 }
 
 .sublink-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .sublink-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   padding: 16px 20px;
   display: flex;
   align-items: center;
   gap: 16px;
   text-decoration: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
 .sublink-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-  border-color: #cbd5e1;
+  box-shadow: var(--shadow-md);
+  border-color: var(--forest-line);
 }
 
 .sublink-card .icon {
   font-size: 1.4rem;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--forest-tint);
+  border: 1px solid var(--forest-line);
+  flex-shrink: 0;
 }
 
-.sublink-card div {
-  flex-grow: 1;
+.sublink-card > div {
+  flex: 1;
+  min-width: 0;
 }
 
 .sublink-card h4 {
-  margin: 0 0 2px 0;
-  font-size: 0.95rem;
-  color: #111827;
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
 }
 
 .sublink-card p {
-  margin: 0;
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 0.85rem;
+  color: var(--ink-mute);
 }
 
 .sublink-card .arrow {
-  font-size: 1.2rem;
-  color: #9ca3af;
-  font-weight: bold;
+  font-size: 1.4rem;
+  color: var(--rust);
+  font-family: var(--font-display);
+  font-weight: 400;
 }
 
 .premium-card-link {
-  border-color: #043c25;
-  background: linear-gradient(135deg, rgba(4, 60, 37, 0.02), rgba(4, 60, 37, 0.06));
+  background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
+  border-color: var(--forest-deep);
+  color: var(--paper);
 }
 
-/* Vizualizare Profil Public (Anunțuri / Recenzii) */
+.premium-card-link h4,
+.premium-card-link p,
+.premium-card-link .arrow {
+  color: var(--paper);
+}
+
+.premium-card-link p {
+  color: rgba(251, 245, 226, 0.75);
+}
+
+.premium-card-link .icon {
+  background: var(--ochre);
+  border-color: var(--ochre-deep);
+}
+
+/* Tabs */
 .profile-content-section {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 .profile-subtabs {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .profile-subtabs button {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #4b5563;
+  background: var(--paper);
+  border: 1px solid var(--line-strong);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-soft);
   cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.profile-subtabs button:hover {
+  border-color: var(--forest);
+  color: var(--forest);
 }
 
 .profile-subtabs button.active {
-  background: #043c25;
-  color: white;
-  border-color: #043c25;
+  background: var(--forest);
+  color: var(--paper);
+  border-color: var(--forest);
+  font-weight: 600;
 }
 
 .tab-card-body {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 24px;
 }
 
 .grid-books-vinted {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
 }
 
 .book-card-item {
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
   overflow: hidden;
+  background: var(--cream);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.book-card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
 }
 
 .cover-thumb {
-  height: 90px;
+  height: 110px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 0.9rem;
-  text-align: center;
-  padding: 5px;
+  align-items: flex-end;
+  justify-content: flex-start;
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .details-thumb {
-  padding: 10px;
+  padding: 12px 12px 14px;
 }
 
 .details-thumb h4 {
-  margin: 0 0 2px 0;
-  font-size: 0.9rem;
-  color: #111827;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 2px;
+  line-height: 1.2;
 }
 
 .details-thumb p {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #6b7280;
+  font-size: 0.78rem;
+  color: var(--ink-mute);
+  font-style: italic;
 }
 
-.reviews-list, .about-row {
+.reviews-list,
+.about-row {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .review-row {
-  border-bottom: 1px solid #f1f5f9;
-  padding-bottom: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.review-row:last-child {
+  border-bottom: none;
 }
 
 .review-row strong {
-  font-size: 0.9rem;
-  color: #111827;
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .review-row p {
-  margin: 4px 0 0 0;
-  font-size: 0.85rem;
-  color: #4b5563;
+  margin-top: 6px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.about-row p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.about-row p strong {
+  color: var(--forest);
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+@media (min-width: 640px) {
+  .sublink-cards {
+    grid-template-columns: 1fr 1fr;
+  }
 }

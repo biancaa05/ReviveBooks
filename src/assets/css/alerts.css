@@ -1,149 +1,173 @@
+/* Alerts — swap request cards */
 .alerts-page {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
 .alerts-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: #ffffff;
-  padding: 16px 24px;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 4px 0;
 }
 
 .alerts-header h1 {
-  font-size: 1.25rem;
-  color: #043c25;
-  font-weight: 700;
-  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 1.1rem + 2vw, 2.4rem);
+  color: var(--ink);
+  letter-spacing: -0.01em;
 }
 
 .alerts-count {
-  background-color: rgba(4, 60, 37, 0.1);
-  color: #043c25;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
+  background: var(--rust);
+  color: var(--paper);
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  padding: 4px 14px;
+  border-radius: var(--radius-pill);
+  transform: rotate(2deg);
+  box-shadow: 0 2px 0 var(--rust-deep);
 }
 
 .alerts-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  width: 100%;
+  gap: 14px;
 }
 
 .alert-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 16px;
-  transition: box-shadow 0.2s ease;
+  align-items: flex-start;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  position: relative;
+}
+
+.alert-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 3px;
+  background: var(--ochre);
+  border-radius: 2px;
 }
 
 .alert-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .alert-avatar {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  color: var(--paper);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   flex-shrink: 0;
+  border: 2px solid var(--paper);
+  box-shadow: 0 0 0 1.5px var(--forest-line);
 }
 
 .alert-content {
-  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .alert-text {
-  margin: 0 0 4px 0;
-  font-size: 0.95rem;
-  color: #1f2937;
-  line-height: 1.4;
+  font-size: 0.98rem;
+  color: var(--ink-soft);
+  line-height: 1.45;
 }
 
-.book-highlight {
-  color: #043c25;
+.alert-text strong {
+  color: var(--ink);
   font-weight: 600;
 }
 
+.book-highlight {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--forest);
+  font-weight: 500;
+}
+
 .alert-time {
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  color: var(--ink-faint);
 }
 
 .alert-actions {
+  grid-column: 1 / -1;
   display: flex;
-  gap: 12px;
-  width: 100%;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--line);
 }
 
-.alert-actions .vinted-btn-primary {
+.alert-actions button {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  text-align: center;
-}
-
-.alert-actions .vinted-btn-outline {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  text-align: center;
 }
 
 .empty-state {
   text-align: center;
   padding: 60px 20px;
-  color: #6b7280;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
+  color: var(--ink-mute);
+  font-family: var(--font-display);
+  font-style: italic;
+  background: var(--paper);
+  border: 1.5px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
 }
 
-/* Adaptare pentru Desktop / Ecrane Lățime Medie/Mare */
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .alert-card {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    grid-template-columns: auto 1fr auto;
     padding: 20px 24px;
-    gap: 20px;
+  }
+
+  .alert-avatar {
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .alert-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
   }
 
   .alert-actions {
-    width: auto;
-    gap: 10px;
+    grid-column: 3;
+    grid-row: 1;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    align-self: center;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .alert-actions .vinted-btn-primary,
-  .alert-actions .vinted-btn-outline {
-    flex: unset;
-    width: 140px;
+  .alert-actions button {
+    min-width: 170px;
   }
 }
