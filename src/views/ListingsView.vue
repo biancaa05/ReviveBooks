@@ -1,28 +1,30 @@
 <template>
   <div class="vinted-page">
     <header class="vinted-top-bar">
-      <div class="search-filter-section-inline">
-        <div class="vinted-search-bar">
-          <span>🔍</span>
-          <input 
-            type="text" 
-            v-model="searchQuery" 
-            placeholder="Caută după titlu, autor sau gen..." 
-          />
-        </div>
-      </div>
-      <button class="vinted-btn-primary" @click="isModalOpen = true">＋ Vinde o carte</button>
+      <h1>ReviveBooks</h1>
+      <button class="vinted-btn-primary" @click="isModalOpen = true">＋ Adaugă</button>
     </header>
 
-    <div class="categories-container">
-      <button 
-        v-for="cat in categories" 
-        :key="cat"
-        :class="['vinted-chip', { active: selectedCategory === cat }]"
-        @click="selectedCategory = cat"
-      >
-        {{ cat }}
-      </button>
+    <div class="search-filter-section">
+      <div class="vinted-search-bar">
+        <span>🔍</span>
+        <input 
+          type="text" 
+          v-model="searchQuery" 
+          placeholder="Caută articole, autori..." 
+        />
+      </div>
+
+      <div class="categories-scroll">
+        <button 
+          v-for="cat in categories" 
+          :key="cat"
+          :class="['vinted-chip', { active: selectedCategory === cat }]"
+          @click="selectedCategory = cat"
+        >
+          {{ cat }}
+        </button>
+      </div>
     </div>
 
     <main class="vinted-grid">
@@ -44,7 +46,7 @@
           </div>
           <p class="book-title-text">{{ book.title }}</p>
           <p class="book-author-text">{{ book.author }}</p>
-          <p class="uploader-text">Adăugat de: {{ book.owner }}</p>
+          <p class="uploader-text">de la {{ book.owner }}</p>
           
           <button class="vinted-btn-outline" @click="requestSwap(book)">
             Vreau cartea
@@ -52,8 +54,14 @@
         </div>
       </div>
     </main>
+
+    <AddBookModal 
+      v-if="isModalOpen" 
+      @close="isModalOpen = false" 
+      @add-book="addNewBook" 
+    />
   </div>
 </template>
 
-<script src="@/assets/js/home.js"></script>
-<style scoped src="@/assets/css/home.css"></style>
+<script src="@/assets/js/listings.js"></script>
+<style scoped src="@/assets/css/listings.css"></style>

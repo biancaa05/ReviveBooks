@@ -1,0 +1,102 @@
+.premium-page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 40px;
+}
+
+.premium-hero {
+  text-align: center;
+  background: #ffffff;
+  padding: 40px 20px;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.premium-hero h1 {
+  color: #043c25;
+  margin: 0 0 10px 0;
+  font-size: 2rem;
+}
+
+.premium-hero p {
+  color: #6b7280;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.premium-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.premium-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+}
+
+.premium-card.featured {
+  border-color: #043c25;
+  box-shadow: 0 10px 25px rgba(4, 60, 37, 0.08);
+}
+
+.badge-popular {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: #043c25;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.premium-card h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 1.25rem;
+}
+
+.price {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #043c25;
+  margin: 0;
+}
+
+.price span {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: normal;
+}
+
+.premium-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #374151;
+  flex-grow: 1;
+}
+
+.premium-card button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}

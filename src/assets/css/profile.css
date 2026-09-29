@@ -1,0 +1,227 @@
+.profile-main-page {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+/* Cardul scurt și lat de profil (Sus) */
+.profile-banner-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.profile-banner-card:hover {
+  border-color: #043c25;
+  box-shadow: 0 4px 12px rgba(4, 60, 37, 0.05);
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-avatar-med {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.banner-info h2 {
+  margin: 0 0 2px 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.banner-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.banner-action-hint {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #043c25;
+  background: rgba(4, 60, 37, 0.08);
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+/* Secțiunea de Subpagini plasată dedesubt */
+.section-title {
+  font-size: 1rem;
+  color: #374151;
+  margin: 10px 0 0 0;
+}
+
+.sublink-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sublink-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sublink-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  border-color: #cbd5e1;
+}
+
+.sublink-card .icon {
+  font-size: 1.4rem;
+}
+
+.sublink-card div {
+  flex-grow: 1;
+}
+
+.sublink-card h4 {
+  margin: 0 0 2px 0;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.sublink-card p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.sublink-card .arrow {
+  font-size: 1.2rem;
+  color: #9ca3af;
+  font-weight: bold;
+}
+
+.premium-card-link {
+  border-color: #043c25;
+  background: linear-gradient(135deg, rgba(4, 60, 37, 0.02), rgba(4, 60, 37, 0.06));
+}
+
+/* Vizualizare Profil Public (Anunțuri / Recenzii) */
+.profile-content-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profile-subtabs {
+  display: flex;
+  gap: 8px;
+}
+
+.profile-subtabs button {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.profile-subtabs button.active {
+  background: #043c25;
+  color: white;
+  border-color: #043c25;
+}
+
+.tab-card-body {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.grid-books-vinted {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.book-card-item {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cover-thumb {
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 5px;
+}
+
+.details-thumb {
+  padding: 10px;
+}
+
+.details-thumb h4 {
+  margin: 0 0 2px 0;
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.details-thumb p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.reviews-list, .about-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.review-row {
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.review-row strong {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.review-row p {
+  margin: 4px 0 0 0;
+  font-size: 0.85rem;
+  color: #4b5563;
+}

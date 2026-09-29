@@ -1,0 +1,152 @@
+/* --- TEMA LIGHT (Alb și Verde) --- */
+:root {
+  --bg-color: #f4f7f5;
+  --card-bg: #ffffff;
+  --text-primary: #1b2e21;
+  --text-secondary: #55755e;
+  --accent-green: #2d6a4f;
+  --accent-green-hover: #1b4332;
+  --border-color: #d8e2dc;
+  --nav-bg: #ffffff;
+}
+
+/* --- TEMA DARK (Negru complet + verde deschis) --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #000000;
+    --card-bg: #121f17;
+    --text-primary: #b7e4c7;
+    --text-secondary: #74c69d;
+    --accent-green: #52b788;
+    --accent-green-hover: #74c69d;
+    --border-color: #1b4332;
+    --nav-bg: #080f0c;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+
+/* --- COMPORTAMENT PENTRU TELEFON (Sub 768px) --- */
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 90px; /* Asigură spațiu jos pentru meniu */
+}
+
+/* Ascundem bara de sus pe telefon */
+.desktop-navbar {
+  display: none;
+}
+
+/* Bara de jos fixată corect pe ecranul telefonului */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--nav-bg);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  z-index: 9999; /* Forțăm să fie deasupra elementelor */
+}
+
+.nav-item {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+.nav-item.router-link-exact-active {
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+/* --- COMPORTAMENT PENTRU LAPTOP (Peste 768px) --- */
+@media (min-width: 768px) {
+  .app-container {
+    max-width: 100% !important;
+    padding-bottom: 40px;
+  }
+
+  /* Ascundem bara de jos pe laptop */
+  .bottom-nav {
+    display: none;
+  }
+
+  /* Activăm bara de sus pe laptop */
+  .desktop-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: var(--nav-bg);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .desktop-logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: var(--accent-green);
+    text-decoration: none;
+  }
+
+  .desktop-menu {
+    display: flex;
+    gap: 40px;
+  }
+
+  .desktop-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s;
+  }
+
+  .desktop-link svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .desktop-link.router-link-exact-active {
+    color: var(--accent-green);
+    font-weight: bold;
+  }
+}
+
+/* Conținut pagini */
+.page-content {
+  padding: 16px;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .page-content {
+    padding: 40px 60px;
+  }
+}

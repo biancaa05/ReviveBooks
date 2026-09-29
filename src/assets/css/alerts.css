@@ -1,0 +1,149 @@
+.alerts-page {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.alerts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+}
+
+.alerts-header h1 {
+  font-size: 1.25rem;
+  color: #043c25;
+  font-weight: 700;
+  margin: 0;
+}
+
+.alerts-count {
+  background-color: rgba(4, 60, 37, 0.1);
+  color: #043c25;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+.alerts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.alert-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 0.2s ease;
+}
+
+.alert-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.alert-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.alert-content {
+  flex-grow: 1;
+}
+
+.alert-text {
+  margin: 0 0 4px 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+  line-height: 1.4;
+}
+
+.book-highlight {
+  color: #043c25;
+  font-weight: 600;
+}
+
+.alert-time {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+.alert-actions {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.alert-actions .vinted-btn-primary {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.alert-actions .vinted-btn-outline {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #6b7280;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+/* Adaptare pentru Desktop / Ecrane Lățime Medie/Mare */
+@media (min-width: 768px) {
+  .alert-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    gap: 20px;
+  }
+
+  .alert-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .alert-actions {
+    width: auto;
+    gap: 10px;
+  }
+
+  .alert-actions .vinted-btn-primary,
+  .alert-actions .vinted-btn-outline {
+    flex: unset;
+    width: 140px;
+  }
+}
