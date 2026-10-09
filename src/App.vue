@@ -1,62 +1,78 @@
 <template>
-  <div class="app-container">
-    <!-- Desktop Navbar -->
-    <header class="desktop-navbar">
-      <div class="navbar-content">
-        <router-link to="/" class="desktop-logo" data-testid="brand-logo">
-          <img src="@/assets/logo.png" alt="ReviveBooks Logo" class="brand-logo-img" />
-          <span class="brand-wordmark">
-            <span class="brand-name">Revive<em>Books</em></span>
-            <span class="brand-tag">schimburi cu suflet</span>
-          </span>
+  <div class="flex min-h-screen w-full flex-col relative">
+    <!-- Top bar (Desktop, hidden on mobile) -->
+    <header
+      class="hidden md:flex sticky top-0 z-[1000] w-full border-b border-line bg-white"
+    >
+      <div class="flex w-full items-center justify-between px-10 py-2.5">
+        <router-link
+          to="/"
+          class="desktop-logo flex h-[70px] items-center justify-center no-underline"
+        >
+          <img
+            src="@/assets/logo.png"
+            alt="ReviveBooks Logo"
+            class="h-[150px] w-auto object-contain"
+          />
         </router-link>
-        <nav class="desktop-menu">
-          <router-link to="/" class="desktop-link" data-testid="nav-home">Acasă</router-link>
-          <router-link to="/alerts" class="desktop-link" data-testid="nav-alerts">Notificări</router-link>
-          <router-link to="/chats" class="desktop-link" data-testid="nav-chats">Mesaje</router-link>
-          <router-link to="/premium" class="desktop-link" data-testid="nav-premium">Premium</router-link>
-          <router-link to="/profile" class="desktop-link" data-testid="nav-profile">Profil</router-link>
+        <nav class="flex gap-[30px]">
+          <router-link
+            to="/"
+            class="desktop-link text-[0.95rem] font-semibold text-slate-600 no-underline transition-colors hover:text-brand"
+          >Home</router-link>
+          <router-link
+            to="/alerts"
+            class="desktop-link text-[0.95rem] font-semibold text-slate-600 no-underline transition-colors hover:text-brand"
+          >Alerts</router-link>
+          <router-link
+            to="/chats"
+            class="desktop-link text-[0.95rem] font-semibold text-slate-600 no-underline transition-colors hover:text-brand"
+          >Chat</router-link>
+          <router-link
+            to="/profile"
+            class="desktop-link text-[0.95rem] font-semibold text-slate-600 no-underline transition-colors hover:text-brand"
+          >Profile</router-link>
         </nav>
       </div>
     </header>
 
     <!-- Page content -->
-    <main class="page-content">
+    <main class="w-full flex-1 px-6 py-6 pb-[90px] md:px-10 md:pb-6">
       <router-view />
     </main>
 
-    <!-- Mobile bottom nav -->
-    <nav class="bottom-nav" data-testid="mobile-nav">
-      <router-link to="/" class="nav-item" data-testid="mob-nav-home">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 10 12 3l8 7v10a1 1 0 0 1-1 1h-4v-7h-6v7H5a1 1 0 0 1-1-1V10z" />
-        </svg>
-        <span>Acasă</span>
+    <!-- Bottom nav (Mobile only) -->
+    <nav
+      class="fixed inset-x-0 bottom-0 z-[99999] flex h-[60px] items-center justify-around border-t border-line bg-white md:hidden"
+    >
+      <router-link
+        to="/"
+        class="nav-item flex flex-col items-center gap-0.5 text-[0.75rem] text-muted no-underline"
+      >
+        <span class="text-[1.2rem]">🏠</span>
+        <span>Home</span>
       </router-link>
-      <router-link to="/alerts" class="nav-item" data-testid="mob-nav-alerts">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 15V10a6 6 0 1 0-12 0v5l-2 3h16l-2-3z" />
-          <path d="M10 21a2 2 0 0 0 4 0" />
-        </svg>
-        <span>Alerte</span>
+      <router-link
+        to="/alerts"
+        class="nav-item flex flex-col items-center gap-0.5 text-[0.75rem] text-muted no-underline"
+      >
+        <span class="text-[1.2rem]">🔔</span>
+        <span>Alerts</span>
       </router-link>
-      <router-link to="/chats" class="nav-item" data-testid="mob-nav-chats">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12a8 8 0 1 1-3-6.2L21 4l-1.2 3A8 8 0 0 1 21 12z" />
-        </svg>
-        <span>Mesaje</span>
+      <router-link
+        to="/chats"
+        class="nav-item flex flex-col items-center gap-0.5 text-[0.75rem] text-muted no-underline"
+      >
+        <span class="text-[1.2rem]">💬</span>
+        <span>Chat</span>
       </router-link>
-      <router-link to="/profile" class="nav-item" data-testid="mob-nav-profile">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 21a8 8 0 0 1 16 0" />
-        </svg>
-        <span>Profil</span>
+      <router-link
+        to="/profile"
+        class="nav-item flex flex-col items-center gap-0.5 text-[0.75rem] text-muted no-underline"
+      >
+        <span class="text-[1.2rem]">👤</span>
+        <span>Profile</span>
       </router-link>
     </nav>
   </div>
 </template>
-
-<script>
-export default { name: "App" };
-</script>

@@ -1,19 +1,17 @@
 <template>
-  <div class="add-book-page">
-    <div class="page-header">
+  <div class="mx-auto flex w-full max-w-[700px] flex-col gap-5 pb-10">
+    <div class="page-header-card block">
       <h1>{{ isEditMode ? 'Editează anunțul cărții' : 'Adaugă o carte pentru schimb' }}</h1>
-      <p class="subtitle">{{ isEditMode ? 'Modifică detaliile de mai jos' : 'Completează detaliile de mai jos' }}</p>
+      <p class="subtitle">
+        {{ isEditMode ? 'Modifică detaliile de mai jos' : 'Completează detaliile de mai jos' }}
+      </p>
     </div>
 
-    <div class="form-container">
-      <div class="form-card">
-        
-        <!-- Câmpul ISBN & AI Helper -->
-        <div class="isbn-section">
-          <div class="form-group flex-grow">
-            <label>Cod ISBN</label>
-            <input type="text" v-model="form.isbn" placeholder="Ex: 978-973-46-..." />
-          </div>
+    <div class="flex flex-col">
+      <div class="flex flex-col gap-4 rounded-xl border border-line bg-white p-6">
+        <div class="form-group">
+          <label>Cod ISBN</label>
+          <input type="text" v-model="form.isbn" placeholder="Ex: 978-973-46-..." />
         </div>
 
         <div class="form-group">
@@ -26,7 +24,7 @@
           <input type="text" v-model="form.author" placeholder="Ex: Sally Rooney" />
         </div>
 
-        <div class="form-row">
+        <div class="grid grid-cols-2 gap-4">
           <div class="form-group">
             <label>Gen literar</label>
             <select v-model="form.genre">
@@ -56,24 +54,29 @@
 
         <div class="form-group">
           <label>Încarcă o poză a cărții</label>
-          <div class="upload-box" @click="triggerUpload">
+          <div
+            class="cursor-pointer rounded-lg border-2 border-dashed border-line-2 bg-canvas p-5 text-center text-[0.9rem] font-medium text-muted transition-all hover:border-brand hover:bg-brand-tint hover:text-brand"
+            @click="triggerUpload"
+          >
             <span>📷 Apasă pentru a selecta o imagine</span>
-            <input type="file" ref="fileInput" @change="handleFileUpload" style="display: none;" />
+            <input type="file" ref="fileInput" @change="handleFileUpload" class="hidden" />
           </div>
-          <span class="file-name" v-if="fileName">Fișier selectat: {{ fileName }}</span>
+          <span v-if="fileName" class="mt-1 text-[0.8rem] font-semibold text-brand">
+            Fișier selectat: {{ fileName }}
+          </span>
         </div>
 
-        <div class="form-actions">
-          <button class="vinted-btn-outline" @click="goBack">Anulează</button>
-          <button class="vinted-btn-primary" @click="submitBook">
+        <div class="mt-2.5 flex gap-3">
+          <button class="vinted-btn-outline !mt-0 flex-1 !py-3 !text-[0.95rem]" @click="goBack">
+            Anulează
+          </button>
+          <button class="vinted-btn-primary flex-1 !py-3 !text-[0.95rem]" @click="submitBook">
             {{ isEditMode ? 'Salvează modificările' : 'Publică anunțul' }}
           </button>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script src="@/assets/js/add.js"></script>
-<style src="@/assets/css/add.css"></style>
