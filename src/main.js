@@ -5,6 +5,8 @@ import { ui } from './ui'
 
 import './style.css'
 
+import './style.css'
+
 const app = createApp(App)
 
 app.config.globalProperties.$ui = ui

@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="max-w-[980px]">
     <section class="animate-rise mb-9">
       <span :class="$ui.eyebrow"><Sparkles :size="14" /> Abonament</span>
@@ -26,12 +27,44 @@
           <li v-for="t in pro" :key="t" class="flex items-center gap-2.5 text-[0.94rem]"><Check :size="16" class="text-gold" /> {{ t }}</li>
         </ul>
         <button class="relative z-10 mt-auto h-12 rounded-full bg-white text-brand font-bold cursor-pointer transition-[transform,box-shadow] hover:-translate-y-px hover:shadow-[0_12px_24px_-10px_rgba(0,0,0,.5)]" data-testid="upgrade-pro-btn" @click="upgradePlan">Treci la PRO</button>
+=======
+  <div class="premium-page">
+    <div class="premium-hero">
+      <h1>✨ ReviveBooks Premium</h1>
+      <p>Deblochează avantaje exclusive și scoate cărțile în evidență!</p>
+    </div>
+
+    <div class="premium-cards-grid">
+      <div class="premium-card">
+        <h3>Standard</h3>
+        <p class="price">Gratuit</p>
+        <ul>
+          <li>✔ Schimburi nelimitate de cărți</li>
+          <li>✔ Acces la chat și mesagerie</li>
+          <li>✖ Vizibilitate prioritară</li>
+        </ul>
+        <button class="vinted-btn-outline" disabled>Planul tău actual</button>
+      </div>
+
+      <div class="premium-card featured">
+        <div class="badge-popular">Cel mai popular</div>
+        <h3>PRO Vinted Reader</h3>
+        <p class="price">19.99 RON <span>/ lună</span></p>
+        <ul>
+          <li>✔ Cărți promovate în Top pagină</li>
+          <li>✔ Fără reclame</li>
+          <li>✔ Badge exclusiv PRO pe profil</li>
+          <li>✔ Suport prioritar la curierat</li>
+        </ul>
+        <button class="vinted-btn-primary" @click="upgradePlan">Treci la PRO</button>
+>>>>>>> f152b90 (Added all pages and some functionalities)
       </div>
     </div>
   </div>
 </template>
 
 <script>
+<<<<<<< HEAD
 import { Sparkles, Check, X } from 'lucide-vue-next'
 
 export default {
@@ -50,7 +83,19 @@ export default {
   methods: {
     upgradePlan() {
       alert('Felicitări! Ești acum membru PRO pe ReviveBooks.')
+=======
+export default {
+  name: 'PremiumView',
+  methods: {
+    upgradePlan() {
+      alert('Felicitări! Ești acum membru PRO pe ReviveBooks.');
+>>>>>>> f152b90 (Added all pages and some functionalities)
     }
   }
 }
 </script>
+<<<<<<< HEAD
+=======
+
+<style src="@/assets/css/premium.css"></style>
+>>>>>>> f152b90 (Added all pages and some functionalities)
