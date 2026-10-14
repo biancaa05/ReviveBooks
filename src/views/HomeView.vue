@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div data-testid="home-page">
     <section v-if="!store.loggedIn && !filtered" class="relative h-[460px] bg-cover bg-center md:h-[624px]" data-testid="hero-section"
       style="background-image: url('https://images.unsplash.com/photo-1655584207245-44c66fc27e54?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000')">
@@ -57,63 +56,3 @@ const books = computed(() => {
     (b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)))
 })
 </script>
-=======
-  <div class="vinted-page">
-    <header class="vinted-top-bar">
-      <div class="search-filter-section-inline">
-        <div class="vinted-search-bar">
-          <span>🔍</span>
-          <input 
-            type="text" 
-            v-model="searchQuery" 
-            placeholder="Caută după titlu, autor sau gen..." 
-          />
-        </div>
-      </div>
-      <button class="vinted-btn-primary" @click="isModalOpen = true">＋ Vinde o carte</button>
-    </header>
-
-    <div class="categories-container">
-      <button 
-        v-for="cat in categories" 
-        :key="cat"
-        :class="['vinted-chip', { active: selectedCategory === cat }]"
-        @click="selectedCategory = cat"
-      >
-        {{ cat }}
-      </button>
-    </div>
-
-    <main class="vinted-grid">
-      <div 
-        class="vinted-card" 
-        v-for="book in filteredBooks" 
-        :key="book.id"
-      >
-        <div class="card-cover" :style="{ backgroundColor: book.bgColor }">
-          <span class="vinted-badge" v-if="book.isPremium">Top</span>
-          <span class="condition-badge">{{ book.condition }}</span>
-          <span class="book-title-overlay">{{ book.title }}</span>
-        </div>
-        
-        <div class="card-details">
-          <div class="price-row">
-            <span class="book-price">Schimb</span>
-            <button class="fav-btn">♡</button>
-          </div>
-          <p class="book-title-text">{{ book.title }}</p>
-          <p class="book-author-text">{{ book.author }}</p>
-          <p class="uploader-text">Adăugat de: {{ book.owner }}</p>
-          
-          <button class="vinted-btn-outline" @click="requestSwap(book)">
-            Vreau cartea
-          </button>
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
-<script src="@/assets/js/home.js"></script>
-<style scoped src="@/assets/css/home.css"></style>
->>>>>>> f152b90 (Added all pages and some functionalities)
