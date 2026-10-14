@@ -12,7 +12,7 @@
             Catalog <AppIcon name="caret" :size="18" fill />
           </button>
           <AppIcon name="search" :size="18" class="ml-3 text-muted" />
-          <input v-model="q" placeholder="Caută cărți sau autori" data-testid="search-input"
+          <input v-model="q" :placeholder="'Caută cărți'" data-testid="search-input"
             class="h-full flex-1 bg-transparent px-2 text-[15px] outline-none placeholder:text-muted" />
           <AppIcon name="camera" :size="20" class="mr-3 text-brand" />
           <div v-if="open === 'catalog'" class="absolute top-11 left-0 w-64 rounded-md border border-line bg-white py-2 shadow-lg" data-testid="catalog-menu">
@@ -39,29 +39,42 @@
             </router-link>
             <div class="relative">
               <button @click="open = open === 'user' ? '' : 'user'" class="flex items-center gap-0.5 p-1" data-testid="header-avatar-btn">
-                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-sm font-medium text-white">B</span>
+                <span class="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-brand text-sm font-medium text-white">
+                  <img v-if="store.avatar" :src="store.avatar" class="h-full w-full object-cover" alt="" />
+                  <template v-else>{{ (store.me[0] || 'U').toUpperCase() }}</template>
+                </span>
                 <AppIcon name="caret" :size="14" fill class="text-muted" />
               </button>
-              <div v-if="open === 'user'" class="absolute right-0 top-11 w-52 rounded-md border border-line bg-white py-2 shadow-lg" data-testid="user-menu">
-                <router-link to="/profile" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft">Profilul meu</router-link>
-                <router-link to="/favorites" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft">Cărți favorite</router-link>
-                <router-link to="/chats" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft">Schimburile mele</router-link>
-                <router-link to="/settings" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft">Setări</router-link>
+              <div v-if="open === 'user'" class="absolute right-0 top-11 w-56 rounded-md border border-line bg-white py-2 shadow-lg" data-testid="user-menu">
+                <router-link to="/profile" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-profile">Profilul meu</router-link>
+                <router-link to="/favorites" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-favorites">Cărți favorite</router-link>
+                <router-link to="/chats" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-swaps">Schimburile mele</router-link>
+                <router-link to="/premium" @click="open = ''" class="flex items-center justify-between px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-premium">
+                  <span class="flex items-center gap-2">
+                    <AppIcon name="star" :size="16" fill class="text-[#ffb703]" /> Premium
+                  </span>
+                  <span v-if="store.isPremium" class="rounded bg-[#ffb703] px-1.5 py-0.5 text-[10px] font-bold text-black">PRO</span>
+                </router-link>
+                <router-link to="/settings" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-settings">Setări</router-link>
                 <button @click="logout" class="block w-full px-4 py-2 text-left text-sm text-[#e5484d] hover:bg-brand-soft" data-testid="logout-btn">Deconectare</button>
               </div>
             </div>
           </template>
           
-          <button v-else @click="store.showAuthModal = true" data-testid="login-btn"
+          <router-link v-else to="/login" data-testid="login-btn"
             class="rounded border border-brand px-3 py-1.5 text-[13px] text-brand transition-colors hover:bg-brand-soft">
-            Înregistrare <span class="mx-0.5 opacity-50">|</span> Conectare
-          </button>
+            Înregistrare <span class="mx-0.5 opacity-50">|</span> Autentificare
+          </router-link>
 
           <router-link to="/add" class="ml-1 rounded bg-brand px-3 py-2 text-[13px] text-white transition-colors hover:bg-brand-dark" data-testid="header-add-book-btn">
-            Adaugă o carte
+            Adaugă carte
           </router-link>
-          <button class="hidden p-2 text-[#4d4d4d] hover:text-brand md:block lg:ml-3" data-testid="header-help-btn"><AppIcon name="help" :size="26" /></button>
-          <button class="hidden items-center text-sm text-[#4d4d4d] md:flex lg:ml-4" data-testid="header-lang-btn">RO <AppIcon name="caret" :size="18" fill /></button>
+          <router-link to="/faq" class="hidden p-2 text-[#4d4d4d] hover:text-brand md:block lg:ml-3" data-testid="header-help-btn">
+            <AppIcon name="help" :size="26" />
+          </router-link>
+          <button @click="toggleLocale" class="hidden items-center text-sm font-medium text-[#4d4d4d] hover:text-brand md:flex lg:ml-4" data-testid="header-lang-btn">
+            {{ locale.toUpperCase() }} <AppIcon name="caret" :size="18" fill />
+          </button>
         </div>
       </div>
     </div>
@@ -87,15 +100,17 @@ import { useRoute, useRouter } from 'vue-router'
 import AppIcon from './AppIcon.vue'
 import NotificationsDropdown from './NotificationsDropdown.vue'
 import AuthModal from './settings/AuthModal.vue'
-import { store, categories } from '@/stores/books'
+import { store, categories, logoutUser } from '@/stores/books'
 
 const route = useRoute()
 const router = useRouter()
 const q = ref('')
 const open = ref('')
+const locale = ref('ro')
 const unread = computed(() => store.conversations.filter((c) => c.unread).length)
 
 const search = () => { open.value = ''; router.push({ path: '/', query: q.value ? { q: q.value } : {} }) }
 const toggleNotif = () => { open.value = open.value === 'notif' ? '' : 'notif'; store.readNotifications = true }
-const logout = () => { store.loggedIn = false; open.value = ''; router.push('/') }
+const toggleLocale = () => { locale.value = locale.value === 'ro' ? 'en' : 'ro' }
+const logout = () => { logoutUser(); open.value = ''; router.push('/') }
 </script>

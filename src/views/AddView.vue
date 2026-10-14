@@ -7,13 +7,29 @@
         <div class="aspect-[2/3] w-full shrink-0 overflow-hidden rounded-sm sm:w-44" data-testid="add-cover-preview">
           <BookCover :book="{ ...form, title: form.title || 'Titlul cărții' }" />
         </div>
-        <div>
-          <p class="font-medium">Coperta</p>
-          <p class="mt-1 text-sm text-muted">Alege culoarea copertei cărții tale.</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            <button v-for="c in coverColors" :key="c" type="button" @click="form.bgColor = c" :data-testid="`cover-color-${c.slice(1)}`"
-              :class="['h-9 w-9 rounded-full ring-offset-2 transition-transform hover:scale-110', form.bgColor === c ? 'ring-2 ring-brand' : '']" :style="{ backgroundColor: c }"></button>
+        <div class="flex-1">
+          <p class="font-medium">Copertă</p>
+          <p class="mt-1 text-sm text-muted">Alege o imagine pentru copertă sau folosește varianta implicită.</p>
+
+          <div class="mt-4 flex flex-wrap items-start gap-3" data-testid="image-gallery">
+            <div v-for="(img, i) in form.images" :key="i"
+              class="group relative h-20 w-16 overflow-hidden rounded-md ring-2 ring-brand">
+              <img :src="img" alt="" class="h-full w-full object-cover" :data-testid="`cover-thumb-${i}`" />
+              <button type="button" @click="removeImage(i)" :data-testid="`remove-image-${i}`"
+                class="absolute inset-0 flex items-center justify-center bg-black/60 text-white opacity-0 transition-opacity group-hover:opacity-100">
+                <AppIcon name="close" :size="20" />
+              </button>
+            </div>
+            <label class="flex h-20 w-16 cursor-pointer flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-line-2 text-brand hover:border-brand hover:bg-brand-soft/40" data-testid="pick-image-label">
+              <AppIcon name="plus" :size="20" />
+              <span class="text-[10px] font-semibold">Adaugă imagini</span>
+              <input ref="fileInput" type="file" accept="image/*" multiple class="hidden" @change="onFiles" data-testid="pick-image-input" />
+            </label>
           </div>
+
+          <p v-if="!form.images.length" class="mt-3 flex items-center gap-2 text-xs text-muted" data-testid="default-cover-hint">
+            <AppIcon name="info" :size="14" /> Folosește coperta implicită (verde)
+          </p>
         </div>
       </section>
 
@@ -35,30 +51,55 @@
       </section>
 
       <div class="flex justify-end">
-        <button class="rounded bg-brand px-8 py-2.5 text-white transition-colors hover:bg-brand-dark" data-testid="add-submit-btn">Adaugă</button>
+        <button class="rounded bg-brand px-8 py-2.5 text-white transition-colors hover:bg-brand-dark" data-testid="add-submit-btn">Publică cartea</button>
       </div>
     </form>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BookCover from '@/components/BookCover.vue'
-import { store, addBook, categories, conditions, coverColors } from '@/stores/books'
+import AppIcon from '@/components/AppIcon.vue'
+import { addBook, categories, conditions, readImage, DEFAULT_COVER_COLOR } from '@/stores/books'
 
 const router = useRouter()
-const form = reactive({ title: '', author: '', description: '', wants: '', category: categories[0], condition: conditions[1], language: 'Română', year: 2024, bgColor: coverColors[0] })
+
+const form = reactive({
+  title: '', author: '', description: '', wants: '',
+  category: categories[0], condition: conditions[1], language: 'Română', year: 2024,
+  bgColor: DEFAULT_COVER_COLOR,
+  images: [],
+})
+
 const textFields = [
-  { key: 'title', label: 'Titlu', placeholder: 'ex. Maitreyi', required: true },
-  { key: 'author', label: 'Autor', placeholder: 'ex. Mircea Eliade', required: true },
-  { key: 'description', label: 'Descrie cartea', placeholder: 'ex. citită o dată, fără sublinieri', area: true },
-  { key: 'wants', label: 'Ce ai vrea în schimb', placeholder: 'ex. orice roman clasic', required: true },
+  { key: 'title', label: 'Titlul cărții', placeholder: 'Maitreyi', required: true },
+  { key: 'author', label: 'Autor', placeholder: 'Mircea Eliade', required: true },
+  { key: 'description', label: 'Descriere', placeholder: '...', area: true },
+  { key: 'wants', label: 'Caută în schimb', placeholder: '...', required: true },
 ]
 const selects = [
   { key: 'category', label: 'Gen', options: categories },
   { key: 'condition', label: 'Stare', options: conditions },
-  { key: 'language', label: 'Limba', options: ['Română', 'Engleză', 'Franceză', 'Germană', 'Spaniolă'] },
+  { key: 'language', label: 'Limbă', options: ['Română', 'Engleză', 'Franceză', 'Germană', 'Spaniolă'] },
 ]
-const submit = () => { store.loggedIn = true; router.push(`/book/${addBook({ ...form })}`) }
+
+const onFiles = async (e) => {
+  const files = Array.from(e.target.files || [])
+  for (const f of files) {
+    if (f && f.type.startsWith('image/')) {
+      const dataUrl = await readImage(f)
+      if (dataUrl) form.images.push(dataUrl)
+    }
+  }
+  e.target.value = ''
+}
+
+const removeImage = (i) => { form.images.splice(i, 1) }
+
+const submit = () => {
+  const id = addBook({ ...form })
+  router.push(`/book/${id}`)
+}
 </script>

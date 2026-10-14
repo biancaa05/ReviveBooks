@@ -13,6 +13,9 @@ import PrivacySettings from '../components/settings/PrivacySettings.vue'
 import SecuritySettings from '../components/settings/SecuritySettings.vue'
 import ShippingSettings from '../components/settings/ShippingSettings.vue'
 import ProfileSettings from '../components/settings/ProfileSettings.vue'
+import FaqView from '../views/FaqView.vue'
+import PremiumView from '../views/PremiumView.vue'
+import LoginView from '../views/LoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +36,9 @@ const router = createRouter({
     { path: '/security', name: 'security', component: SecuritySettings },
     { path: '/shipping', name: 'shipping', component: ShippingSettings },
     { path: '/profile-settings', name: 'profile-settings', component: ProfileSettings },
+    { path: '/faq', name: 'faq', component: FaqView },
+    { path: '/premium', name: 'premium', component: PremiumView },
+    { path: '/login', name: 'login', component: LoginView },
   ],
 })
 

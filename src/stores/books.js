@@ -1,29 +1,64 @@
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 
 export const categories = ['Ficțiune', 'Sci-Fi & Fantasy', 'Thriller', 'Romance', 'Dezvoltare personală', 'Biografii', 'Istorie', 'Copii', 'Manuale', 'Limbi străine']
 export const conditions = ['Nouă', 'Ca nouă', 'Foarte bună', 'Bună', 'Acceptabilă']
 export const coverColors = ['#043c25', '#1b4332', '#2d6a4f', '#40916c', '#52b788', '#74c69d', '#0b5d3b', '#285943']
+export const DEFAULT_COVER_COLOR = '#043c25'
 
 const b = (id, title, author, category, condition, owner, bgColor, likes, wants, extra = {}) => ({
   id, title, author, category, condition, owner, bgColor, likes, wants,
+  images: [],
   isPremium: false, language: 'Română', year: 2020, added: 'acum 2 zile',
   description: 'Carte citită o singură dată, păstrată cu grijă, fără sublinieri sau pagini îndoite.',
   ...extra,
 })
 
-export const store = reactive({
-  loggedIn: false,
-  showAuthModal: false,
-  me: 'bianca',
-  bannerClosed: false,
-  favorites: [3, 7, 11],
-  
-  settings: {
-    about: 'Pasionat(ă) de lectură și schimburi de cărți.',
-    name: 'Bianca',
-    email: 'bianca@example.com',
-    location: 'București',
+const defaultSettings = () => ({
+  about: 'Pasionat(ă) de lectură și schimburi de cărți.',
+  name: 'Bianca',
+  fullName: 'Bianca Popescu',
+  email: 'bianca@example.com',
+  phone: '+40 712 345 678',
+  gender: 'Feminin',
+  birth: '1998-05-14',
+  location: 'București',
+  country: 'România',
+  city: 'București',
+  showCity: true,
+  language: 'Română',
+  vacation: false,
+  google: false,
+  facebook: false,
+  address: { name: 'Bianca Popescu', street: 'Str. Bibliotecii nr. 12', zip: '010101', city: 'București' },
+  shipHome: true,
+  shipPoint: true,
+  notif: {
+    news: true, marketing: false, messages: true, feedback: true, favorites: true,
+    email: true, limit: 'Până la 5 notificări',
   },
+  privacy: { showOnline: true, personalized: true, thirdParty: false },
+})
+
+const loadPersisted = () => {
+  try {
+    const raw = localStorage.getItem('rb_state_v2')
+    if (raw) return JSON.parse(raw)
+  } catch { /* ignore */ }
+  return null
+}
+
+const persisted = loadPersisted()
+
+export const store = reactive({
+  loggedIn: persisted?.loggedIn ?? false,
+  showAuthModal: false,
+  authMode: 'login',
+  me: persisted?.me ?? 'bianca',
+  avatar: persisted?.avatar ?? null,
+  isPremium: persisted?.isPremium ?? false,
+  bannerClosed: false,
+  favorites: persisted?.favorites ?? [3, 7, 11],
+  settings: { ...defaultSettings(), ...(persisted?.settings || {}) },
 
   books: [
     b(1, 'Normal People', 'Sally Rooney', 'Romance', 'Ca nouă', 'ana_p', '#043c25', 166, 'Conversations with Friends', { isPremium: true, language: 'Engleză', year: 2019 }),
@@ -61,23 +96,22 @@ export const store = reactive({
     { id: 3, user: 'alexandrub201', bookId: 7, time: 'acum 6 luni', messages: [
       { type: 'them', text: 'Am și Gone Girl, facem schimbul?', time: 'acum 6 luni' },
     ] },
-    { id: 4, user: 'inimadecarte', bookId: 8, time: 'acum 8 luni', messages: [
-      { type: 'me', text: 'The BFG de Roald Dahl (în engleză) e în stare bună?', time: 'acum 8 luni' },
-    ] },
-    { id: 5, user: 'dariaiancu33', bookId: 9, time: 'acum 8 luni', messages: [
-      { type: 'them', text: 'Carte Bacalaureat Informatică — o mai ai?', time: 'acum 8 luni' },
-    ] },
-    { id: 6, user: 'deea_44', bookId: 10, time: 'acum 9 luni', messages: [
-      { type: 'them', text: 'Bună! Ai schimba această carte?', time: 'acum 9 luni' },
-    ] },
   ],
   notifications: [
-    { id: 1, text: 'kriszi_09 a acceptat propunerea ta de schimb pentru „Maitreyi”.', time: 'acum 2 săptămâni', bookId: 5 },
+    { id: 1, text: 'kriszi_09 a acceptat propunerea ta de schimb pentru „Maitreyi".', time: 'acum 2 săptămâni', bookId: 5 },
     { id: 2, text: 'margo4real a adăugat o carte nouă din lista ta de dorințe.', time: 'acum 3 săptămâni', bookId: 11 },
-    { id: 3, text: '11 persoane au adăugat „1984” la favorite.', time: 'acum o lună', bookId: 17 },
+    { id: 3, text: '11 persoane au adăugat „1984" la favorite.', time: 'acum o lună', bookId: 17 },
   ],
   readNotifications: false,
 })
+
+watch(
+  () => ({ loggedIn: store.loggedIn, me: store.me, avatar: store.avatar, isPremium: store.isPremium, favorites: store.favorites, settings: store.settings }),
+  (val) => {
+    try { localStorage.setItem('rb_state_v2', JSON.stringify(val)) } catch { /* ignore */ }
+  },
+  { deep: true },
+)
 
 export const getBook = (id) => store.books.find((x) => x.id === Number(id))
 export const isFav = (id) => store.favorites.includes(id)
@@ -94,7 +128,7 @@ export function startSwap(book, offerTitle) {
     conv = { id: Date.now(), user: book.owner, bookId: book.id, time: 'acum', messages: [] }
     store.conversations.unshift(conv)
   }
-  if (offerTitle) conv.messages.push({ type: 'system', title: 'Schimb propus', text: `Ai oferit „${offerTitle}” în schimbul „${book.title}”.`, time: 'acum' })
+  if (offerTitle) conv.messages.push({ type: 'system', title: 'Schimb propus', text: `Ai oferit „${offerTitle}" în schimbul „${book.title}".`, time: 'acum' })
   return conv.id
 }
 
@@ -106,16 +140,24 @@ export function sendMessage(convId, text) {
 
 export function addBook(data) {
   const id = Math.max(...store.books.map((x) => x.id)) + 1
-  store.books.unshift({ ...data, id, owner: store.me, likes: 0, isPremium: false, added: 'acum' })
+  const images = Array.isArray(data.images) ? data.images.filter(Boolean) : []
+  const useDefaultCover = images.length === 0
+  store.books.unshift({
+    ...data,
+    id,
+    images,
+    bgColor: useDefaultCover ? DEFAULT_COVER_COLOR : (data.bgColor || DEFAULT_COVER_COLOR),
+    owner: store.me,
+    likes: 0,
+    isPremium: store.isPremium,
+    added: 'acum',
+  })
   return id
 }
 
 export function readImage(file) {
   return new Promise((resolve, reject) => {
-    if (!file) {
-      resolve(null)
-      return
-    }
+    if (!file) { resolve(null); return }
     const reader = new FileReader()
     reader.onload = (e) => resolve(e.target.result)
     reader.onerror = (error) => reject(error)
@@ -123,12 +165,18 @@ export function readImage(file) {
   })
 }
 
-export function login(email, password) {
+export function login(username, email) {
   store.loggedIn = true
   store.showAuthModal = false
+  if (username) store.me = username
+  if (email) store.settings.email = email
 }
 
 export function logoutUser() {
   store.loggedIn = false
-  store.showAuthModal = true
+  store.isPremium = false
+}
+
+export function activatePremium() {
+  store.isPremium = true
 }

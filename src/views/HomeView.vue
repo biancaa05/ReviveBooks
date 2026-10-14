@@ -5,8 +5,8 @@
       <div class="mx-auto flex h-full max-w-[1240px] items-center px-3">
         <div class="w-full max-w-[384px] rounded-lg bg-white p-8 shadow-sm">
           <h1 class="text-2xl leading-snug font-medium">Ești gata să-ți eliberezi raftul de cărți?</h1>
-          <router-link to="/add" class="mt-8 block rounded bg-brand py-3 text-center text-white transition-colors hover:bg-brand-dark" data-testid="hero-add-book-btn">
-            Adaugă o carte
+          <router-link to="/login" class="mt-8 block rounded bg-brand py-3 text-center text-white transition-colors hover:bg-brand-dark" data-testid="hero-add-book-btn">
+            Conectează-te/Înregistrează-te
           </router-link>
           <a href="#cum-functioneaza" @click.prevent="how = !how" class="mt-6 block text-center font-medium text-brand hover:underline" data-testid="hero-how-it-works">
             Află cum funcționează
