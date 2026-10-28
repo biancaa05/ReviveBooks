@@ -1,13 +1,11 @@
 <template>
   <div class="relative min-h-[calc(100vh-54px)] overflow-hidden bg-brand-soft" data-testid="login-page">
-    <!-- Decorative background -->
     <div class="pointer-events-none absolute inset-0">
       <div class="absolute -left-32 -top-24 h-96 w-96 rounded-full bg-brand/10 blur-3xl"></div>
       <div class="absolute -right-28 bottom-10 h-[28rem] w-[28rem] rounded-full bg-leaf/15 blur-3xl"></div>
     </div>
 
     <div class="relative mx-auto grid max-w-[1240px] gap-10 px-4 py-10 md:grid-cols-[1.1fr_1fr] md:gap-16 md:py-16 lg:py-20">
-      <!-- Left: Pitch -->
       <section class="hidden flex-col justify-center md:flex" data-testid="login-pitch">
         <span class="mb-3 inline-flex w-fit items-center gap-2 rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand">
           <AppIcon name="swap" :size="14" /> Comunitate de cititori
@@ -27,7 +25,6 @@
         </ul>
       </section>
 
-      <!-- Right: Card -->
       <section class="relative mx-auto w-full max-w-[460px]" data-testid="login-card">
         <div class="rounded-2xl border border-line bg-white p-7 shadow-[0_18px_40px_-20px_rgba(4,60,37,0.2)] md:p-9">
           <h1 class="text-center text-2xl font-semibold text-ink" data-testid="login-title">
@@ -117,8 +114,11 @@ import { ref, reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import AppIcon from '@/components/AppIcon.vue'
 import { login, store } from '@/stores/books'
+import { useI18n } from 'vue-i18n'
+import { toast } from '@/stores/toast'
 
 const router = useRouter()
+const { t } = useI18n()
 const isRegister = ref(false)
 const showPw = ref(false)
 const forgot = ref(false)
@@ -128,8 +128,9 @@ const form = reactive({ username: '', email: '', password: '', remember: true, t
 const toggleMode = () => { isRegister.value = !isRegister.value; error.value = '' }
 
 const social = (provider) => {
-  login('bianca', 'bianca@example.com')
+  login('user', 'user@example.com')
   store.settings[provider] = true
+  toast(t('toast.welcome'))
   router.push('/')
 }
 
@@ -140,6 +141,7 @@ const submit = () => {
   if (!emailOk || !pwOk) { error.value = 'Datele introduse nu sunt valide.'; return }
   const username = isRegister.value ? form.username.trim() : (form.email.includes('@') ? form.email.split('@')[0] : form.email.trim())
   login(username, isRegister.value ? form.email : (form.email.includes('@') ? form.email : store.settings.email))
+  toast(`${t('toast.welcome')} ${username}`.trim())
   router.push('/')
 }
 </script>

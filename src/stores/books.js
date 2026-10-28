@@ -11,9 +11,6 @@ export const conditions = categoriesData.conditions
 export const coverColors = categoriesData.coverColors
 export const DEFAULT_COVER_COLOR = categoriesData.defaultCoverColor
 
-/**
- * Returns current local time formatted as hour and minutes (HH:mm)
- */
 export function getCurrentTime() {
   const now = new Date()
   const hours = String(now.getHours()).padStart(2, '0')
@@ -24,6 +21,7 @@ export function getCurrentTime() {
 export const defaultSettings = () => ({ ...usersData.currentUser })
 
 export const store = reactive({
+  ready: false,
   loggedIn: false,
   showAuthModal: false,
   authMode: 'login',
@@ -65,10 +63,10 @@ export async function initStoreFromDb() {
     await nextTick()
     lastSavedJson = JSON.stringify(getPersistPayload())
     isReady = true
+    store.ready = true
   }
 }
 
-// Automatically initialize from the simulated JSON database on load
 initStoreFromDb()
 
 const getPersistPayload = () => ({
@@ -84,7 +82,6 @@ const getPersistPayload = () => ({
   readNotifications: store.readNotifications,
 })
 
-// Securely persist to simulated JSON database on changes
 watch(
   getPersistPayload,
   (val) => {
@@ -159,6 +156,12 @@ export function addBook(data) {
   debouncedPersistDatabase(getPersistPayload())
   return id
 }
+
+export function removeBook(id) {
+  store.books = store.books.filter((b) => b.id !== id)
+  store.favorites = store.favorites.filter((f) => f !== id)
+}
+
 
 export function readImage(file) {
   return new Promise((resolve, reject) => {

@@ -110,6 +110,46 @@
       "year": "Publication year"
     }
   },
+    "common": { "cancel": "Cancel", "delete": "Delete" },
+  "filters": {
+    "condition": "Condition",
+    "language": "Language",
+    "sort": "Sort",
+    "all": "All",
+    "sort_featured": "Featured",
+    "sort_popular": "Most loved",
+    "sort_newest": "Newest",
+    "sort_title": "Title A–Z",
+    "results_count": "books found"
+  },
+  "toast": {
+    "book_added": "Your book has been published.",
+    "book_deleted": "The book has been removed.",
+    "max_images": "You can add up to 6 images.",
+    "welcome": "Welcome back!"
+  },
+  "chats_empty": {
+    "title": "No conversations yet",
+    "text": "When you propose a swap or message someone, conversations will show up here.",
+    "cta": "Discover books"
+  },
+  "profile_del": {
+    "title": "Delete book",
+    "text": "Are you sure you want to remove “{title}” from your shelf? This cannot be undone.",
+    "confirm": "Delete"
+  },
+  "error": {
+    "back_home": "Back to home",
+    "go_back": "Go back",
+    "title_404": "Page not found",
+    "text_404": "The page you are looking for doesn't exist or has been moved.",
+    "title_400": "Bad request",
+    "text_400": "Something was wrong with that request. Please try again.",
+    "title_403": "Access denied",
+    "text_403": "You don't have permission to view this page.",
+    "title_500": "Something went wrong",
+    "text_500": "An unexpected error occurred on our side. Please try again later."
+  },
   "footer": {
     "privacy_center": "Privacy Center",
     "cookie_policy": "Cookie Policy",

@@ -21,5 +21,5 @@
 import { computed } from 'vue'
 import BookCard from '@/components/BookCard.vue'
 import { store, getBook } from '@/stores/books'
-const favs = computed(() => store.favorites.map(getBook))
+const favs = computed(() => store.favorites.map(getBook).filter(Boolean))
 </script>

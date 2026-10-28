@@ -28,5 +28,6 @@
 import BookCover from './BookCover.vue'
 import AppIcon from './AppIcon.vue'
 import { toggleFav, isFav } from '@/stores/books'
-defineProps({ book: Object })
+defineProps({ book: Object, own: Boolean })
+defineEmits(['delete'])
 </script>

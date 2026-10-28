@@ -110,6 +110,46 @@
       "year": "Anul apariției"
     }
   },
+    "common": { "cancel": "Anulează", "delete": "Șterge" },
+  "filters": {
+    "condition": "Stare",
+    "language": "Limba",
+    "sort": "Sortează",
+    "all": "Toate",
+    "sort_featured": "Recomandate",
+    "sort_popular": "Cele mai iubite",
+    "sort_newest": "Cele mai noi",
+    "sort_title": "Titlul A–Z",
+    "results_count": "cărți găsite"
+  },
+  "toast": {
+    "book_added": "Cartea ta a fost publicată.",
+    "book_deleted": "Cartea a fost ștearsă.",
+    "max_images": "Poți adăuga maxim 6 imagini.",
+    "welcome": "Bine ai revenit!"
+  },
+  "chats_empty": {
+    "title": "Nicio conversație încă",
+    "text": "Când propui un schimb sau scrii cuiva, conversațiile vor apărea aici.",
+    "cta": "Descoperă cărți"
+  },
+  "profile_del": {
+    "title": "Șterge cartea",
+    "text": "Sigur vrei să elimini „{title}” de pe raftul tău? Acțiunea nu poate fi anulată.",
+    "confirm": "Șterge"
+  },
+  "error": {
+    "back_home": "Înapoi acasă",
+    "go_back": "Înapoi",
+    "title_404": "Pagina nu a fost găsită",
+    "text_404": "Pagina pe care o cauți nu există sau a fost mutată.",
+    "title_400": "Cerere incorectă",
+    "text_400": "Ceva n-a mers cu cererea ta. Te rugăm să încerci din nou.",
+    "title_403": "Acces interzis",
+    "text_403": "Nu ai permisiunea să vezi această pagină.",
+    "title_500": "Ceva n-a mers",
+    "text_500": "A apărut o eroare neașteptată. Te rugăm să încerci mai târziu."
+  },
   "footer": {
     "privacy_center": "Centru de confidențialitate",
     "cookie_policy": "Politica privind modulele cookie",

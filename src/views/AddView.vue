@@ -64,13 +64,14 @@ import { useI18n } from 'vue-i18n'
 import BookCover from '@/components/BookCover.vue'
 import AppIcon from '@/components/AppIcon.vue'
 import { addBook, categories, conditions, readImage, DEFAULT_COVER_COLOR } from '@/stores/books'
+import { toast } from '@/stores/toast'
 
 const router = useRouter()
 const { t } = useI18n()
 
 const form = reactive({
   title: '', author: '', description: '', wants: '',
-  category: categories[0], condition: conditions[1], language: 'Română', year: 2024,
+  category: categories[0], condition: conditions[1], language: 'Română', year: new Date().getFullYear(),
   bgColor: DEFAULT_COVER_COLOR,
   images: [],
 })
@@ -81,20 +82,28 @@ const textFields = computed(() => [
   { key: 'description', label: t('add.fields.description'), placeholder: t('add.fields.description_placeholder'), area: true },
   { key: 'wants', label: t('add.fields.wants'), placeholder: t('add.fields.wants_placeholder'), required: true },
 ])
+
+const years = Array.from(
+  { length: new Date().getFullYear() - 1949 },
+  (_, i) => new Date().getFullYear() - i,
+)
+
 const selects = computed(() => [
   { key: 'category', label: t('add.fields.category'), options: categories, prefix: 'category.' },
   { key: 'condition', label: t('add.fields.condition'), options: conditions, prefix: 'condition.' },
-  { key: 'language', label: t('add.fields.language'), options: ['Română', 'Engleză', 'Franceză', 'Germană', 'Spaniolă'] },
+  { key: 'year', label: t('add.fields.year'), options: years },
+  { key: 'language', label: t('add.fields.language'), options: ['Română', 'English'] },
 ])
 
+const MAX_IMAGES = 6
 const onFiles = async (e) => {
-  const files = Array.from(e.target.files || [])
-  for (const f of files) {
-    if (f && f.type.startsWith('image/')) {
+  const files = Array.from(e.target.files || []).filter((f) => f && f.type.startsWith('image/'))
+  const room = MAX_IMAGES - form.images.length
+  if (files.length > room) toast(t('add.max_images'), 'error')
+  for (const f of files.slice(0, room)) {
       const dataUrl = await readImage(f)
       if (dataUrl) form.images.push(dataUrl)
     }
-  }
   e.target.value = ''
 }
 
@@ -102,6 +111,7 @@ const removeImage = (i) => { form.images.splice(i, 1) }
 
 const submit = () => {
   const id = addBook({ ...form })
+  toast(t('toast.book_added'))
   router.push(`/book/${id}`)
 }
 </script>

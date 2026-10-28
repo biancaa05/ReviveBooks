@@ -1,7 +1,7 @@
 <template>
   <span class="flex items-center justify-center overflow-hidden rounded-full bg-brand font-medium text-white" data-testid="user-avatar">
     <img v-if="store.avatar" :src="store.avatar" alt="" class="h-full w-full object-cover" />
-    <template v-else>{{ store.me[0].toUpperCase() }}</template>
+    <template v-else>{{ (store.me?.[0] || 'U').toUpperCase() }}</template>
   </span>
 </template>
 

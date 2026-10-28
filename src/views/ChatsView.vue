@@ -3,16 +3,22 @@
     <div class="flex h-[780px] max-w-[962px] overflow-hidden border border-line">
       <aside :class="['w-full shrink-0 overflow-y-auto border-r border-line md:block md:w-[300px]', route.params.id ? 'hidden' : 'block']">
         <h2 class="border-b border-line px-4 py-4 font-medium">{{ $t('chats.inbox') }}</h2>
+        <div v-if="!store.conversations.length" class="flex flex-col items-center gap-3 px-4 py-16 text-center" data-testid="chats-empty">
+          <AppIcon name="mail" :size="36" class="text-brand" />
+          <p class="font-medium">{{ $t('chats_empty.title') }}</p>
+          <p class="text-sm text-muted">{{ $t('chats_empty.text') }}</p>
+          <router-link to="/" class="rounded bg-brand px-4 py-2 text-sm text-white hover:bg-brand-dark" data-testid="chats-empty-cta">{{ $t('chats_empty.cta') }}</router-link>
+        </div>
         <router-link v-for="c in store.conversations" :key="c.id" :to="`/chat/${c.id}`" @click="c.unread = false" :data-testid="`conversation-${c.id}`"
           :class="['flex gap-3 border-b border-line px-4 py-4 transition-colors hover:bg-[#f5f5f5]', active?.id === c.id ? 'bg-[#f0f0f0]' : '']">
-          <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg text-white uppercase" :style="{ backgroundColor: getBook(c.bookId).bgColor }">{{ c.user[0] }}</span>
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-lg text-white uppercase" :style="{ backgroundColor: bookFor(c).bgColor }">{{ c.user[0] }}</span>
           <span class="min-w-0 flex-1">
             <span class="flex items-baseline justify-between gap-2">
               <span :class="['truncate', c.unread ? 'font-semibold' : 'font-medium']">{{ c.user }}</span>
               <span class="shrink-0 text-sm text-muted">{{ c.time }}</span>
             </span>
             <span class="block truncate text-[#4d4d4d]">{{ preview(c) }}</span>
-            <span class="mt-1 block h-8 w-6 rounded-sm" :style="{ backgroundColor: getBook(c.bookId).bgColor }"></span>
+                        <span class="mt-1 block h-8 w-6 rounded-sm" :style="{ backgroundColor: bookFor(c).bgColor }"></span>
           </span>
         </router-link>
       </aside>
@@ -59,7 +65,7 @@
 </template>
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, nextTick, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AppIcon from '@/components/AppIcon.vue'
 import BookCover from '@/components/BookCover.vue'
@@ -69,8 +75,14 @@ const route = useRoute()
 const text = ref('')
 const scroller = ref(null)
 const active = computed(() => store.conversations.find((c) => c.id === Number(route.params.id)) || store.conversations[0])
-const book = computed(() => getBook(active.value.bookId))
-const preview = (c) => { const m = c.messages.at(-1); return m ? (m.text || m.title) : getBook(c.bookId).title }
+const book = computed(() => getBook(active.value?.bookId) || { bgColor: '#043c25', title: '—', author: '', wants: '' })
+const bookFor = (c) => getBook(c.bookId) || { bgColor: '#043c25', title: '—' }
+const preview = (c) => { const m = c.messages.at(-1); return m ? (m.text || m.title) : bookFor(c).title }
+
+watch(() => route.params.id, async () => {
+  await nextTick()
+  if (scroller.value) scroller.value.scrollTop = scroller.value.scrollHeight
+}, { immediate: true })
 
 const send = async () => {
   if (!text.value.trim()) return

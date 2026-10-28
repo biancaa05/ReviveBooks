@@ -62,7 +62,10 @@
       </div>
 
       <h2 v-if="others.length" class="mt-10 mb-5 text-xl font-semibold">{{ $t('book_view.other_books') }} {{ book.owner }}</h2>
-      <BookGrid :books="others" />
+      <template v-if="others.length">
+        <h2 class="mt-10 mb-5 text-xl font-semibold">{{ $t('book_view.other_books') }} {{ book.owner }}</h2>
+        <BookGrid :books="others" />
+      </template>
     </div>
   </div>
   <p v-else class="py-24 text-center text-muted">{{ $t('book_view.not_found') }}</p>

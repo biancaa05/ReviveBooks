@@ -11,7 +11,6 @@ export function getDb() {
       const content = fs.readFileSync(DB_PATH, 'utf-8')
       return JSON.parse(content)
     }
-    // Seed from JSON data files if db.json does not exist yet
     const booksPath = path.resolve(__dirname, '../src/data/books.json')
     const usersPath = path.resolve(__dirname, '../src/data/users.json')
     const convPath = path.resolve(__dirname, '../src/data/conversations.json')
@@ -92,18 +91,16 @@ function sendJson(res, statusCode, data) {
 }
 
 export async function handleApiRequest(req, res, next) {
-  // Only handle /api routes
   const parsedUrl = new URL(req.url, 'http://localhost')
-  const pathname = parsedUrl.pathname
+  const pathname = parsedUrl.pathname.replace(/^\/storeapi/, '/api')
 
-  if (!pathname.startsWith('/api')) {
+  if (!pathname.startsWith('/api') && !pathname.startsWith('/storeapi')) {
     if (next) return next()
     res.statusCode = 404
     res.end()
     return
   }
 
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.statusCode = 204
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -114,7 +111,6 @@ export async function handleApiRequest(req, res, next) {
   }
 
   try {
-    // GET /api/db - Read full simulated database
     if (pathname === '/api/db' && req.method === 'GET') {
       const data = getDb()
       if (!data) {
@@ -123,7 +119,6 @@ export async function handleApiRequest(req, res, next) {
       return sendJson(res, 200, data)
     }
 
-    // POST or PUT /api/db - Update full simulated database
     if (pathname === '/api/db' && (req.method === 'POST' || req.method === 'PUT')) {
       const body = await parseJsonBody(req)
       const current = getDb() || {}
@@ -138,22 +133,24 @@ export async function handleApiRequest(req, res, next) {
       return sendJson(res, 200, { success: true, message: 'Database saved securely' })
     }
 
-    // GET /api/books
     if (pathname === '/api/books' && req.method === 'GET') {
       const data = getDb()
       return sendJson(res, 200, data?.books || [])
     }
 
-    // POST /api/books - Add book
     if (pathname === '/api/books' && req.method === 'POST') {
       const newBook = await parseJsonBody(req)
+            if (!newBook || typeof newBook.title !== 'string' || !newBook.title.trim() || typeof newBook.author !== 'string' || !newBook.author.trim()) {
+        return sendJson(res, 400, { error: 'Title and author are required' })
+      }
       const current = getDb() || { books: [] }
-      current.books = [newBook, ...(current.books || [])]
+      const id = Math.max(0, ...(current.books || []).map((b) => Number(b.id) || 0)) + 1
+      const book = { likes: 0, images: [], ...newBook, id }
+      current.books = [book, ...(current.books || [])]
       saveDb(current)
-      return sendJson(res, 201, newBook)
+      return sendJson(res, 201, book)
     }
 
-    // Pass through if unhandled and next exists
     if (next) {
       return next()
     }

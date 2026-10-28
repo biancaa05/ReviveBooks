@@ -9,12 +9,7 @@
  * persistence is handled via structured API requests.
  */
 
-const getApiBase = () => {
-  if (typeof window !== 'undefined' && window.location) {
-    return '/api'
-  }
-  return 'http://localhost:3000/api'
-}
+const getApiBase = () => '/storeapi'
 
 export async function fetchDatabase() {
   try {

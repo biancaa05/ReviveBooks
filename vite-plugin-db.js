@@ -14,7 +14,7 @@ export function jsonDbPlugin() {
     },
     configurePreviewServer(server) {
       server.middlewares.use(async (req, res, next) => {
-        if (req.url && req.url.startsWith('/api')) {
+        if (req.url && (req.url.startsWith('/storeapi') || req.url.startsWith('/api'))) {
           await handleApiRequest(req, res, next)
         } else {
           next()

@@ -7,7 +7,7 @@
     <template v-else>
       <router-link v-for="n in store.notifications.slice(0, 3)" :key="n.id" :to="`/book/${n.bookId}`" @click="$emit('close')"
         class="flex gap-3 border-b border-line p-4 hover:bg-brand-soft">
-        <span class="h-10 w-7 shrink-0 rounded-sm" :style="{ backgroundColor: getBook(n.bookId).bgColor }"></span>
+          <span class="h-10 w-7 shrink-0 rounded-sm" :style="{ backgroundColor: getBook(n.bookId)?.bgColor || '#043c25' }"></span>
         <span>
           <span class="block text-sm leading-snug">{{ n.text }}</span>
           <span class="mt-1 block text-xs text-muted">{{ n.time }}</span>

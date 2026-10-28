@@ -48,7 +48,7 @@
           <AppIcon name="close" :size="22" />
         </button>
         <h2 class="text-xl font-semibold text-ink">Checkout</h2>
-        <p class="mt-1 text-sm text-muted">ReviveBooks PRO · <span class="font-semibold text-brand">19.99 RON</span> /lună</p>
+                <p class="mt-1 text-sm text-muted">ReviveBooks PRO · <span class="font-semibold text-brand">29.99 RON</span> /lună</p>
 
         <form @submit.prevent="pay" class="mt-5 flex flex-col gap-3.5" data-testid="checkout-form">
           <label class="flex flex-col gap-1.5">

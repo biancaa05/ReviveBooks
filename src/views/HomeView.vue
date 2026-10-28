@@ -29,8 +29,46 @@
         <router-link to="/" class="text-sm text-brand hover:underline" data-testid="clear-filter">{{ $t('home.clear_filters') }}</router-link>
       </div>
 
-      <div class="mt-8 mb-10">
-        <BookGrid v-if="books.length" :books="books" />
+      <div class="mt-6 flex flex-wrap items-end gap-3" data-testid="home-filters">
+        <label class="flex items-center gap-2 text-sm text-[#4d4d4d]">
+          <span>{{ $t('filters.condition') }}</span>
+          <select v-model="cond" data-testid="home-condition-filter"
+            class="rounded border border-line bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-brand">
+            <option value="">{{ $t('filters.all') }}</option>
+            <option v-for="c in conditions" :key="c" :value="c">{{ $t(`condition.${c}`) }}</option>
+          </select>
+        </label>
+        <label class="flex items-center gap-2 text-sm text-[#4d4d4d]">
+          <span>{{ $t('filters.language') }}</span>
+          <select v-model="lang" data-testid="home-language-filter"
+            class="rounded border border-line bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-brand">
+            <option value="">{{ $t('filters.all') }}</option>
+            <option v-for="l in languages" :key="l" :value="l">{{ l }}</option>
+          </select>
+        </label>
+        <label class="ml-auto flex items-center gap-2 text-sm text-[#4d4d4d]">
+          <span>{{ $t('filters.sort') }}</span>
+          <select v-model="sort" data-testid="home-sort-select"
+            class="rounded border border-line bg-white px-3 py-2 text-sm outline-none transition-colors focus:border-brand">
+            <option value="">{{ $t('filters.sort_featured') }}</option>
+            <option value="popular">{{ $t('filters.sort_popular') }}</option>
+            <option value="newest">{{ $t('filters.sort_newest') }}</option>
+            <option value="title">{{ $t('filters.sort_title') }}</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="mt-3 text-sm text-muted" data-testid="results-count">{{ books.length }} {{ $t('filters.results_count') }}</p>
+
+      <div class="mt-4 mb-10">
+        <div v-if="!store.ready" class="grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-5" data-testid="home-skeleton">
+          <div v-for="i in 10" :key="i" class="animate-pulse">
+            <div class="aspect-[2/3] w-full rounded-[3px] bg-[#e8e8e8]"></div>
+            <div class="mt-2 h-3 w-3/4 rounded bg-[#e8e8e8]"></div>
+            <div class="mt-1 h-3 w-1/2 rounded bg-[#e8e8e8]"></div>
+          </div>
+        </div>
+        <BookGrid v-else-if="books.length" :books="books" />
         <p v-else class="py-20 text-center text-muted" data-testid="no-results">{{ $t('home.no_results') }}</p>
       </div>
     </div>
@@ -39,22 +77,47 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import AppIcon from '@/components/AppIcon.vue'
 import BookGrid from '@/components/BookGrid.vue'
-import { store } from '@/stores/books'
+import { store, categories, conditions } from '@/stores/books'
 
 const route = useRoute()
+const router = useRouter()
 const { t } = useI18n()
 const how = ref(false)
 const filtered = computed(() => route.query.q || route.query.cat)
 const title = computed(() => (route.query.cat ? t(`category.${route.query.cat}`) : t('home.results_for', { q: route.query.q })))
+const languages = computed(() => [...new Set(store.books.map((b) => b.language))])
+
+const setQuery = (patch) => {
+  const query = { ...route.query, ...patch }
+  Object.keys(query).forEach((k) => !query[k] && delete query[k])
+  router.replace({ query })
+}
+const bind = (key) => computed({
+  get: () => route.query[key] || '',
+  set: (v) => setQuery({ [key]: v || undefined }),
+})
+const cond = bind('cond')
+const lang = bind('lang')
+const sort = bind('sort')
+
 const books = computed(() => {
   const q = (route.query.q || '').toLowerCase()
-  return store.books.filter((b) =>
+  const cat = route.query.cat || ''
+  const condQ = route.query.cond || ''
+  const langQ = route.query.lang || ''
+  let list = store.books.filter((b) =>
     b.owner !== store.me &&
-    (!route.query.cat || b.category === route.query.cat) &&
-    (b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)))
+    (!cat || b.category === cat) &&
+    (!condQ || b.condition === condQ) &&
+    (!langQ || b.language === langQ) &&
+    (!q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q)))
+  if (sort.value === 'popular') list = [...list].sort((a, b) => b.likes - a.likes)
+  else if (sort.value === 'newest') list = [...list].sort((a, b) => b.id - a.id)
+  else if (sort.value === 'title') list = [...list].sort((a, b) => a.title.localeCompare(b.title, 'ro'))
+  return list
 })
 </script>

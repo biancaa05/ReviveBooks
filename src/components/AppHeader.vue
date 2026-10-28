@@ -78,6 +78,12 @@
         </div>
       </div>
     </div>
+
+    <form @submit.prevent="search" class="mx-3 mb-3 flex h-10 items-center rounded-md bg-field md:hidden" data-testid="search-form-mobile">
+      <AppIcon name="search" :size="18" class="ml-3 text-muted" />
+      <input v-model="q" :placeholder="$t('header.search_placeholder')" data-testid="search-input-mobile"
+        class="h-full min-w-0 flex-1 bg-transparent px-2 text-[15px] outline-none placeholder:text-muted" />
+    </form>
     
     <nav class="hidden border-b border-line md:block" data-testid="category-nav">
       <div class="mx-auto flex max-w-[1240px] gap-1 overflow-x-auto px-3">
