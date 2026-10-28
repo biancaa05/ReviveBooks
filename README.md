@@ -28,15 +28,13 @@
 
 ## 📱 Previzualizare
 
-| Ecranul principal (Home) | Detalii carte & profil |
+| Ecranul principal (Home) | Pagina de login |
 | :---: | :---: |
-| ![Home Screen](URL_POZA_ACASA) | ![Book Detail](URL_POZA_DETALII) |
+| ![Home Screen](home.png) | ![Book Detail](login.png) |
 
-| Camera de chat | Formular livrare / adăugare |
+| Camera de chat | Adăugare carte |
 | :---: | :---: |
-| ![Chat Screen](URL_POZA_CHAT) | ![Add Book](URL_POZA_ADAUGA) |
-
-> 💡 Înlocuiește `URL_POZA_*` cu linkuri directe către imagini sau cu căi relative, de exemplu `./screenshots/home.png`.
+| ![Chat Screen](chats.png) | ![Add Book](add_book.png) |
 
 ---
 
