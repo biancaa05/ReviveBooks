@@ -151,5 +151,64 @@
     "continue_btn": "Continue",
     "forgot_password": "Forgot password?",
     "reset_sent": "We sent a password reset link to your email."
+  },
+  "legal": { "last_updated": "Last updated: October 2026" },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "Your trust matters to us. This policy explains what personal information ReviveBooks collects, why we use it, and the choices available to you.",
+    "section_1_title": "1. Information we collect",
+    "section_1_text": "We collect the details needed to create your account, list books, arrange swaps, and keep the marketplace safe. This may include your name, email address, profile details, messages, listings, and delivery information.",
+    "section_2_title": "2. How we use your information",
+    "section_2_text": "We use information to operate ReviveBooks, connect members, personalize your experience, provide support, prevent misuse, and send important service updates.",
+    "section_3_title": "3. Sharing and retention",
+    "section_3_text": "We only share information with people or service providers when needed to complete a swap, provide a requested service, meet a legal obligation, or protect our community. We retain it only as long as necessary.",
+    "section_4_title": "4. Your choices and rights",
+    "section_4_text": "You can request access, correction, deletion, or portability of your personal data. Contact us through the support channel in the app and we will respond in line with applicable privacy law."
+  },
+  "terms": {
+    "title": "Terms & Conditions",
+    "intro": "These terms keep swapping clear, fair, and safe for every ReviveBooks member.",
+    "section_1_title": "1. Using ReviveBooks",
+    "section_1_text": "You must provide accurate account information, keep your login details secure, and use the platform only for lawful book discovery and swaps.",
+    "section_2_title": "2. Listings and book condition",
+    "section_2_text": "List only books you own or are authorized to offer. Descriptions, photographs, and condition details must be honest, complete, and up to date.",
+    "section_3_title": "3. Swaps and communication",
+    "section_3_text": "Members are responsible for confirming swap details and packaging books carefully. Keep messages respectful and never share payment credentials or sensitive personal information.",
+    "section_4_title": "4. Community safety",
+    "section_4_text": "We may remove content or restrict accounts that break these terms, put others at risk, or undermine the trust of the community."
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "intro": "Cookies help ReviveBooks remember your preferences and make the swapping experience work smoothly.",
+    "section_1_title": "1. What cookies are",
+    "section_1_text": "Cookies are small files stored on your device by a website. They allow us to remember choices and understand how people use our services.",
+    "section_2_title": "2. Necessary cookies",
+    "section_2_text": "These cookies support core features such as secure sessions, language preferences, and basic navigation. They cannot be switched off in our systems.",
+    "section_3_title": "3. Optional cookies",
+    "section_3_text": "With your permission, preference and analytics cookies help us remember settings and improve the design and performance of ReviveBooks.",
+    "section_4_title": "4. Managing cookies",
+    "section_4_text": "You can update optional cookie choices at any time from Cookie Settings. Your browser may also let you block or delete cookies."
+  },
+  "cookie_settings": {
+    "title": "Cookie Settings",
+    "intro": "Choose which optional cookies you are comfortable with. Necessary cookies are always active because the platform cannot work without them.",
+    "necessary_title": "Necessary cookies",
+    "necessary_text": "Keep accounts, sessions, security, and language preferences working.",
+    "preferences_title": "Preference cookies",
+    "preferences_text": "Remember choices such as your preferred language and display settings.",
+    "analytics_title": "Analytics cookies",
+    "analytics_text": "Help us understand which parts of the experience can be improved.",
+    "save": "Save preferences",
+    "saved": "Your cookie preferences have been saved."
+  },
+  "platform": {
+    "title": "Our Platform",
+    "intro": "ReviveBooks gives well-loved books a new chapter by helping readers discover, list, and swap them with confidence.",
+    "value_1_title": "Discover",
+    "value_1_text": "Find thoughtful reads from real people and browse by genre, condition, and language.",
+    "value_2_title": "Swap",
+    "value_2_text": "Offer books you have finished and connect with someone who is ready for your next story.",
+    "value_3_title": "Reuse",
+    "value_3_text": "Keep books in circulation, reduce waste, and make reading more accessible to everyone."
   }
 }

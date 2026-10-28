@@ -17,6 +17,11 @@ import ProfileSettings from '../components/settings/ProfileSettings.vue'
 import FaqView from '../views/FaqView.vue'
 import PremiumView from '../views/PremiumView.vue'
 import LoginView from '../views/LoginView.vue'
+import PrivacyView from '../views/PrivacyView.vue'
+import TermsView from '../views/TermsView.vue'
+import CookiesView from '../views/CookiesView.vue'
+import CookieSettingsView from '../views/CookieSettingsView.vue'
+import PlatformView from '../views/PlatformView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +46,11 @@ const router = createRouter({
     { path: '/faq', name: 'faq', component: FaqView },
     { path: '/premium', name: 'premium', component: PremiumView },
     { path: '/login', name: 'login', component: LoginView },
+    { path: '/privacy', name: 'privacy-policy', component: PrivacyView },
+    { path: '/terms', name: 'terms', component: TermsView },
+    { path: '/cookies', name: 'cookie-policy', component: CookiesView },
+    { path: '/cookie-settings', name: 'cookie-settings', component: CookieSettingsView },
+    { path: '/platform', name: 'platform', component: PlatformView },
   ],
 })
 

@@ -151,5 +151,64 @@
     "continue_btn": "Continuă",
     "forgot_password": "Ai uitat parola?",
     "reset_sent": "Ți-am trimis un link de resetare pe e-mail."
+  },
+  "legal": { "last_updated": "Ultima actualizare: octombrie 2026" },
+  "privacy": {
+    "title": "Politica de confidențialitate",
+    "intro": "Încrederea ta contează pentru noi. Această politică explică ce date personale colectează ReviveBooks, de ce le folosim și ce opțiuni ai.",
+    "section_1_title": "1. Informațiile pe care le colectăm",
+    "section_1_text": "Colectăm datele necesare pentru cont, listarea cărților, schimburi și siguranța comunității: nume, e-mail, profil, mesaje, anunțuri și date de livrare.",
+    "section_2_title": "2. Cum folosim informațiile",
+    "section_2_text": "Folosim datele pentru a opera ReviveBooks, a conecta membrii, a personaliza experiența, a oferi suport și a preveni utilizarea abuzivă.",
+    "section_3_title": "3. Partajare și păstrare",
+    "section_3_text": "Partajăm date doar când este necesar pentru un schimb, un serviciu solicitat, o obligație legală sau protejarea comunității și le păstrăm atât cât este necesar.",
+    "section_4_title": "4. Drepturile tale",
+    "section_4_text": "Poți solicita accesul, corectarea, ștergerea sau portabilitatea datelor. Contactează-ne prin canalul de suport din aplicație, iar noi vom răspunde conform legii."
+  },
+  "terms": {
+    "title": "Termeni și condiții",
+    "intro": "Acești termeni fac schimburile clare, corecte și sigure pentru fiecare membru ReviveBooks.",
+    "section_1_title": "1. Utilizarea ReviveBooks",
+    "section_1_text": "Oferă informații corecte, păstrează datele de autentificare în siguranță și folosește platforma doar pentru descoperirea și schimbul legal de cărți.",
+    "section_2_title": "2. Anunțuri și starea cărților",
+    "section_2_text": "Listează doar cărți pe care le deții sau ai dreptul să le oferi. Descrierile, fotografiile și starea cărții trebuie să fie corecte și actualizate.",
+    "section_3_title": "3. Schimburi și comunicare",
+    "section_3_text": "Membrii confirmă detaliile schimbului și ambalează cărțile cu grijă. Păstrează un limbaj respectuos și nu distribui date sensibile.",
+    "section_4_title": "4. Siguranța comunității",
+    "section_4_text": "Putem elimina conținutul sau restricționa conturile care încalcă termenii, pun pe cineva în pericol sau afectează încrederea comunității."
+  },
+  "cookies": {
+    "title": "Politica privind modulele cookie",
+    "intro": "Cookie-urile ajută ReviveBooks să îți rețină preferințele și să ofere o experiență de schimb simplă.",
+    "section_1_title": "1. Ce sunt cookie-urile",
+    "section_1_text": "Cookie-urile sunt fișiere mici salvate pe dispozitiv de un site. Ne ajută să reținem alegeri și să înțelegem cum sunt folosite serviciile.",
+    "section_2_title": "2. Cookie-uri necesare",
+    "section_2_text": "Acestea susțin sesiunile sigure, preferința de limbă și navigarea de bază. Nu pot fi dezactivate în sistemele noastre.",
+    "section_3_title": "3. Cookie-uri opționale",
+    "section_3_text": "Cu acordul tău, cookie-urile de preferințe și analiză ne ajută să reținem setările și să îmbunătățim platforma.",
+    "section_4_title": "4. Gestionarea cookie-urilor",
+    "section_4_text": "Poți actualiza oricând opțiunile din pagina Setări cookie. Browserul îți poate permite, de asemenea, să blochezi sau să ștergi cookie-urile."
+  },
+  "cookie_settings": {
+    "title": "Setări cookie",
+    "intro": "Alege cookie-urile opționale pe care le accepți. Cele necesare sunt mereu active deoarece platforma nu poate funcționa fără ele.",
+    "necessary_title": "Cookie-uri necesare",
+    "necessary_text": "Păstrează funcționale conturile, sesiunile, securitatea și preferința de limbă.",
+    "preferences_title": "Cookie-uri de preferințe",
+    "preferences_text": "Rețin alegeri precum limba preferată și setările de afișare.",
+    "analytics_title": "Cookie-uri de analiză",
+    "analytics_text": "Ne ajută să înțelegem ce părți ale experienței pot fi îmbunătățite.",
+    "save": "Salvează preferințele",
+    "saved": "Preferințele cookie au fost salvate."
+  },
+  "platform": {
+    "title": "Platforma noastră",
+    "intro": "ReviveBooks oferă cărților iubite un nou capitol, ajutând cititorii să le descopere, listeze și schimbe cu încredere.",
+    "value_1_title": "Descoperă",
+    "value_1_text": "Găsește lecturi de la oameni reali și caută după gen, stare și limbă.",
+    "value_2_title": "Schimbă",
+    "value_2_text": "Oferă cărțile citite și conectează-te cu cineva care așteaptă următoarea poveste.",
+    "value_3_title": "Refolosește",
+    "value_3_text": "Păstrează cărțile în circulație, redu risipa și fă lectura mai accesibilă pentru toți."
   }
 }
