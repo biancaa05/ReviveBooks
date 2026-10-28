@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto flex max-w-[720px] flex-col items-center px-4 py-20 text-center md:py-28" data-testid="error-page">
+  <div class="mx-auto flex max-w-720px flex-col items-center px-4 py-20 text-center md:py-28" data-testid="error-page">
     <p class="font-display text-[clamp(4rem,2rem+6vw,7rem)] font-semibold leading-none tracking-tight text-brand" data-testid="error-code">{{ code }}</p>
     <h1 class="mt-4 text-2xl font-semibold text-ink" data-testid="error-title">{{ title }}</h1>
     <p class="mt-3 max-w-[46ch] leading-relaxed text-[#4d4d4d]" data-testid="error-text">{{ text }}</p>

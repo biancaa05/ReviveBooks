@@ -1,5 +1,5 @@
 <template>
-  <div class="pointer-events-none fixed bottom-6 left-1/2 z-[120] flex -translate-x-1/2 flex-col items-center gap-2" data-testid="app-toaster">
+  <div class="pointer-events-none fixed bottom-6 left-1/2 z-120 flex -translate-x-1/2 flex-col items-center gap-2" data-testid="app-toaster">
     <TransitionGroup name="toast">
       <div v-for="tl in toasts" :key="tl.id" role="status"
         :class="['pointer-events-auto flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-lift', tl.type === 'error' ? 'bg-[#e5484d]' : 'bg-brand']"

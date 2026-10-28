@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed inset-0 z-[110] flex items-center justify-center bg-black/50 p-4" @click.self="$emit('cancel')" data-testid="confirm-dialog">
-    <div class="w-full max-w-[400px] rounded-2xl bg-white p-7 shadow-xl">
+  <div class="fixed inset-0 z-110 flex items-center justify-center bg-black/50 p-4" @click.self="$emit('cancel')" data-testid="confirm-dialog">
+    <div class="w-full max-w-400 rounded-2xl bg-white p-7 shadow-xl">
       <h2 class="text-lg font-semibold text-ink" data-testid="confirm-dialog-title">{{ title }}</h2>
       <p class="mt-2 text-sm leading-relaxed text-[#4d4d4d]" data-testid="confirm-dialog-message">{{ message }}</p>
       <div class="mt-6 flex justify-end gap-3">
