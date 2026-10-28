@@ -1,114 +1,98 @@
-import { reactive, watch } from 'vue'
+import { reactive, watch, nextTick } from 'vue'
+import { fetchDatabase, debouncedPersistDatabase } from '../services/db.js'
+import booksData from '@/data/books.json'
+import usersData from '@/data/users.json'
+import conversationsData from '@/data/conversations.json'
+import notificationsData from '@/data/notifications.json'
+import categoriesData from '@/data/categories.json'
 
-export const categories = ['Ficțiune', 'Sci-Fi & Fantasy', 'Thriller', 'Romance', 'Dezvoltare personală', 'Biografii', 'Istorie', 'Copii', 'Manuale', 'Limbi străine']
-export const conditions = ['Nouă', 'Ca nouă', 'Foarte bună', 'Bună', 'Acceptabilă']
-export const coverColors = ['#043c25', '#1b4332', '#2d6a4f', '#40916c', '#52b788', '#74c69d', '#0b5d3b', '#285943']
-export const DEFAULT_COVER_COLOR = '#043c25'
+export const categories = categoriesData.categories
+export const conditions = categoriesData.conditions
+export const coverColors = categoriesData.coverColors
+export const DEFAULT_COVER_COLOR = categoriesData.defaultCoverColor
 
-const b = (id, title, author, category, condition, owner, bgColor, likes, wants, extra = {}) => ({
-  id, title, author, category, condition, owner, bgColor, likes, wants,
-  images: [],
-  isPremium: false, language: 'Română', year: 2020, added: 'acum 2 zile',
-  description: 'Carte citită o singură dată, păstrată cu grijă, fără sublinieri sau pagini îndoite.',
-  ...extra,
-})
-
-const defaultSettings = () => ({
-  about: 'Pasionat(ă) de lectură și schimburi de cărți.',
-  name: 'Bianca',
-  fullName: 'Bianca Popescu',
-  email: 'bianca@example.com',
-  phone: '+40 712 345 678',
-  gender: 'Feminin',
-  birth: '1998-05-14',
-  location: 'București',
-  country: 'România',
-  city: 'București',
-  showCity: true,
-  language: 'Română',
-  vacation: false,
-  google: false,
-  facebook: false,
-  address: { name: 'Bianca Popescu', street: 'Str. Bibliotecii nr. 12', zip: '010101', city: 'București' },
-  shipHome: true,
-  shipPoint: true,
-  notif: {
-    news: true, marketing: false, messages: true, feedback: true, favorites: true,
-    email: true, limit: 'Până la 5 notificări',
-  },
-  privacy: { showOnline: true, personalized: true, thirdParty: false },
-})
-
-const loadPersisted = () => {
-  try {
-    const raw = localStorage.getItem('rb_state_v2')
-    if (raw) return JSON.parse(raw)
-  } catch { /* ignore */ }
-  return null
+/**
+ * Returns current local time formatted as hour and minutes (HH:mm)
+ */
+export function getCurrentTime() {
+  const now = new Date()
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  return `${hours}:${minutes}`
 }
 
-const persisted = loadPersisted()
+export const defaultSettings = () => ({ ...usersData.currentUser })
 
 export const store = reactive({
-  loggedIn: persisted?.loggedIn ?? false,
+  loggedIn: false,
   showAuthModal: false,
   authMode: 'login',
-  me: persisted?.me ?? 'bianca',
-  avatar: persisted?.avatar ?? null,
-  isPremium: persisted?.isPremium ?? false,
+  me: usersData.currentUser.username || 'bianca',
+  avatar: null,
+  isPremium: false,
   bannerClosed: false,
-  favorites: persisted?.favorites ?? [3, 7, 11],
-  settings: { ...defaultSettings(), ...(persisted?.settings || {}) },
-
-  books: [
-    b(1, 'Normal People', 'Sally Rooney', 'Romance', 'Ca nouă', 'ana_p', '#043c25', 166, 'Conversations with Friends', { isPremium: true, language: 'Engleză', year: 2019 }),
-    b(2, 'Educated', 'Tara Westover', 'Biografii', 'Bună', 'mihai.d', '#1b4332', 16, 'Orice biografie', { isPremium: true }),
-    b(3, 'Atomic Habits', 'James Clear', 'Dezvoltare personală', 'Foarte bună', 'elena_v', '#40916c', 54, 'Deep Work', { year: 2021 }),
-    b(4, 'Dune', 'Frank Herbert', 'Sci-Fi & Fantasy', 'Acceptabilă', 'radu_m', '#2d6a4f', 6, 'Fundația - Isaac Asimov'),
-    b(5, 'Maitreyi', 'Mircea Eliade', 'Ficțiune', 'Bună', 'kriszi_09', '#0b5d3b', 2, 'Romane clasice românești', { year: 2015 }),
-    b(6, 'Baiatul cu pijamale în dungi', 'John Boyne', 'Ficțiune', 'Ca nouă', 'ginaginutza003', '#285943', 21, 'The Book Thief'),
-    b(7, 'Fata din tren', 'Paula Hawkins', 'Thriller', 'Foarte bună', 'alexandrub201', '#52b788', 9, 'Gone Girl'),
-    b(8, 'The BFG', 'Roald Dahl', 'Copii', 'Nouă', 'inimadecarte', '#74c69d', 33, 'Matilda', { language: 'Engleză' }),
-    b(9, 'Bacalaureat Informatică', 'Mariana Miloșescu', 'Manuale', 'Bună', 'dariaiancu33', '#1b4332', 12, 'Culegere matematică M1', { year: 2023 }),
-    b(10, 'Sapiens', 'Yuval Noah Harari', 'Istorie', 'Foarte bună', 'deea_44', '#043c25', 88, 'Homo Deus', { isPremium: true }),
-    b(11, 'Harry Potter și Piatra Filozofală', 'J.K. Rowling', 'Sci-Fi & Fantasy', 'Bună', 'margo4real', '#2d6a4f', 120, 'Orice volum din serie'),
-    b(12, 'Le Petit Prince', 'Antoine de Saint-Exupéry', 'Limbi străine', 'Ca nouă', 'ana_p', '#40916c', 7, 'Cărți în franceză', { language: 'Franceză' }),
-    b(13, 'Crimă și pedeapsă', 'F.M. Dostoievski', 'Ficțiune', 'Acceptabilă', 'radu_m', '#0b5d3b', 14, 'Idiotul'),
-    b(14, 'It Ends With Us', 'Colleen Hoover', 'Romance', 'Foarte bună', 'kriszi_09', '#52b788', 47, 'It Starts With Us'),
-    b(15, 'Steve Jobs', 'Walter Isaacson', 'Biografii', 'Bună', 'mihai.d', '#285943', 5, 'Elon Musk - W. Isaacson'),
-    b(16, 'Micul Prinț', 'Antoine de Saint-Exupéry', 'Copii', 'Ca nouă', 'bianca', '#2d6a4f', 3, 'Cărți pentru copii'),
-    b(17, '1984', 'George Orwell', 'Ficțiune', 'Foarte bună', 'bianca', '#043c25', 11, 'Ferma animalelor'),
-  ],
-  conversations: [
-    { id: 1, user: 'kriszi_09', bookId: 5, time: 'acum 2 săptămâni', unread: true, messages: [
-      { type: 'system', title: 'Schimb propus', time: 'acum 2 săptămâni' },
-      { type: 'system', title: 'Schimb acceptat', text: 'Ați căzut de acord asupra schimbului.', time: 'acum 2 săptămâni' },
-      { type: 'system', title: 'Cărți expediate', time: 'acum 2 săptămâni' },
-      { type: 'system', title: 'Livrat', time: 'acum 2 săptămâni' },
-      { type: 'system', title: 'Feedback adăugat!', text: 'Îți mulțumim pentru feedback.', time: 'acum 2 săptămâni' },
-      { type: 'system', title: 'Finalizat', text: 'Îți mulțumim că faci schimb de cărți pe ReviveBooks.', time: 'acum 2 săptămâni', cta: true },
-    ] },
-    { id: 2, user: 'ginaginutza003', bookId: 6, time: 'acum 6 luni', messages: [
-      { type: 'them', text: 'Bună! Mai este disponibilă cartea?', time: 'acum 6 luni' },
-      { type: 'me', text: 'Da, încă e disponibilă. Ce ai propune la schimb?', time: 'acum 6 luni' },
-      { type: 'them', text: 'Baiatul cu pijamale în dungi pentru The Book Thief?', time: 'acum 6 luni' },
-    ] },
-    { id: 3, user: 'alexandrub201', bookId: 7, time: 'acum 6 luni', messages: [
-      { type: 'them', text: 'Am și Gone Girl, facem schimbul?', time: 'acum 6 luni' },
-    ] },
-  ],
-  notifications: [
-    { id: 1, text: 'kriszi_09 a acceptat propunerea ta de schimb pentru „Maitreyi".', time: 'acum 2 săptămâni', bookId: 5 },
-    { id: 2, text: 'margo4real a adăugat o carte nouă din lista ta de dorințe.', time: 'acum 3 săptămâni', bookId: 11 },
-    { id: 3, text: '11 persoane au adăugat „1984" la favorite.', time: 'acum o lună', bookId: 17 },
-  ],
+  favorites: [3, 7, 11],
+  settings: defaultSettings(),
+  books: booksData,
+  conversations: conversationsData,
+  notifications: notificationsData,
   readNotifications: false,
 })
 
+let isReady = false
+let lastSavedJson = ''
+
+export async function initStoreFromDb() {
+  try {
+    const data = await fetchDatabase()
+    if (data) {
+      if (Array.isArray(data.books) && data.books.length > 0) store.books = data.books
+      if (Array.isArray(data.conversations)) store.conversations = data.conversations
+      if (Array.isArray(data.notifications)) store.notifications = data.notifications
+      if (Array.isArray(data.favorites)) store.favorites = data.favorites
+      if (data.settings && typeof data.settings === 'object') {
+        store.settings = { ...defaultSettings(), ...data.settings }
+      }
+      if (typeof data.loggedIn === 'boolean') store.loggedIn = data.loggedIn
+      if (typeof data.me === 'string') store.me = data.me
+      if (data.avatar !== undefined) store.avatar = data.avatar
+      if (typeof data.isPremium === 'boolean') store.isPremium = data.isPremium
+      if (typeof data.readNotifications === 'boolean') store.readNotifications = data.readNotifications
+    }
+  } catch (err) {
+    console.warn('[Store] Could not load from simulated DB:', err)
+  } finally {
+    await nextTick()
+    lastSavedJson = JSON.stringify(getPersistPayload())
+    isReady = true
+  }
+}
+
+// Automatically initialize from the simulated JSON database on load
+initStoreFromDb()
+
+const getPersistPayload = () => ({
+  loggedIn: store.loggedIn,
+  me: store.me,
+  avatar: store.avatar,
+  isPremium: store.isPremium,
+  favorites: store.favorites,
+  settings: store.settings,
+  books: store.books,
+  conversations: store.conversations,
+  notifications: store.notifications,
+  readNotifications: store.readNotifications,
+})
+
+// Securely persist to simulated JSON database on changes
 watch(
-  () => ({ loggedIn: store.loggedIn, me: store.me, avatar: store.avatar, isPremium: store.isPremium, favorites: store.favorites, settings: store.settings }),
+  getPersistPayload,
   (val) => {
-    try { localStorage.setItem('rb_state_v2', JSON.stringify(val)) } catch { /* ignore */ }
+    if (!isReady) return
+    const currentJson = JSON.stringify(val)
+    if (currentJson === lastSavedJson) return
+    lastSavedJson = currentJson
+    debouncedPersistDatabase(val)
   },
   { deep: true },
 )
@@ -119,29 +103,49 @@ export const isFav = (id) => store.favorites.includes(id)
 export function toggleFav(id) {
   const book = getBook(id)
   const i = store.favorites.indexOf(id)
-  if (i >= 0) { store.favorites.splice(i, 1); book.likes-- } else { store.favorites.push(id); book.likes++ }
+  if (i >= 0) {
+    store.favorites.splice(i, 1)
+    if (book) book.likes--
+  } else {
+    store.favorites.push(id)
+    if (book) book.likes++
+  }
+  debouncedPersistDatabase(getPersistPayload())
 }
 
 export function startSwap(book, offerTitle) {
+  const time = getCurrentTime()
   let conv = store.conversations.find((c) => c.bookId === book.id)
   if (!conv) {
-    conv = { id: Date.now(), user: book.owner, bookId: book.id, time: 'acum', messages: [] }
+    conv = { id: Date.now(), user: book.owner, bookId: book.id, time, messages: [] }
     store.conversations.unshift(conv)
   }
-  if (offerTitle) conv.messages.push({ type: 'system', title: 'Schimb propus', text: `Ai oferit „${offerTitle}" în schimbul „${book.title}".`, time: 'acum' })
+  if (offerTitle) {
+    conv.messages.push({
+      type: 'system',
+      title: 'Schimb propus',
+      text: `Ai oferit „${offerTitle}" în schimbul „${book.title}".`,
+      time,
+    })
+  }
+  debouncedPersistDatabase(getPersistPayload())
   return conv.id
 }
 
 export function sendMessage(convId, text) {
   const conv = store.conversations.find((c) => c.id === convId)
-  conv.messages.push({ type: 'me', text, time: 'acum' })
-  conv.time = 'acum'
+  if (!conv) return
+  const time = getCurrentTime()
+  conv.messages.push({ type: 'me', text, time })
+  conv.time = time
+  debouncedPersistDatabase(getPersistPayload())
 }
 
 export function addBook(data) {
-  const id = Math.max(...store.books.map((x) => x.id)) + 1
+  const id = Math.max(...store.books.map((x) => x.id), 0) + 1
   const images = Array.isArray(data.images) ? data.images.filter(Boolean) : []
   const useDefaultCover = images.length === 0
+  const time = getCurrentTime()
   store.books.unshift({
     ...data,
     id,
@@ -150,8 +154,9 @@ export function addBook(data) {
     owner: store.me,
     likes: 0,
     isPremium: store.isPremium,
-    added: 'acum',
+    added: time,
   })
+  debouncedPersistDatabase(getPersistPayload())
   return id
 }
 
@@ -170,13 +175,16 @@ export function login(username, email) {
   store.showAuthModal = false
   if (username) store.me = username
   if (email) store.settings.email = email
+  debouncedPersistDatabase(getPersistPayload())
 }
 
 export function logoutUser() {
   store.loggedIn = false
   store.isPremium = false
+  debouncedPersistDatabase(getPersistPayload())
 }
 
 export function activatePremium() {
   store.isPremium = true
+  debouncedPersistDatabase(getPersistPayload())
 }

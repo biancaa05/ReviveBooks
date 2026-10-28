@@ -13,12 +13,12 @@
     <router-link :to="`/book/${book.id}`" class="block px-1 pt-2">
       <div class="flex items-start justify-between gap-2 text-xs text-muted">
         <span class="truncate">{{ book.author }}</span>
-        <span v-if="book.isPremium" class="shrink-0 text-ink">Promovat</span>
+        <span v-if="book.isPremium" class="shrink-0 text-ink">{{ $t('book.promoted') }}</span>
       </div>
-      <p class="truncate text-xs text-muted">{{ book.title }} · {{ book.condition }}</p>
-      <p class="mt-2 text-xs text-muted truncate">Vrea: {{ book.wants }}</p>
+      <p class="truncate text-xs text-muted">{{ book.title }} · {{ $t(`condition.${book.condition}`, book.condition) }}</p>
+      <p class="mt-2 text-xs text-muted truncate">{{ $t('book.wants') }}: {{ book.wants }}</p>
       <p class="flex items-center gap-1 text-[15px] text-brand" data-testid="book-swap-label">
-        Schimb <span class="text-xs">gratuit</span> <AppIcon name="shield" :size="13" />
+        {{ $t('book.swap') }} <span class="text-xs">{{ $t('book.free') }}</span> <AppIcon name="shield" :size="13" />
       </p>
     </router-link>
   </div>

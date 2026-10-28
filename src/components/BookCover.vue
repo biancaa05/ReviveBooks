@@ -19,7 +19,7 @@
       </div>
     </template>
     <span v-if="book.isPremium && badges" class="absolute top-2.5 left-2.5 rounded bg-[#ffb703] px-2 py-0.5 text-[11px] font-bold text-black">Top</span>
-    <span v-if="badges && book.condition" class="absolute bottom-2.5 right-2.5 rounded bg-black/60 px-2 py-0.5 text-[11px] text-white">{{ book.condition }}</span>
+    <span v-if="badges && book.condition" class="absolute bottom-2.5 left-2.5 rounded bg-black/60 px-2 py-0.5 text-[11px] text-white">{{ $t(`condition.${book.condition}`, book.condition) }}</span>
   </div>
 </template>
 

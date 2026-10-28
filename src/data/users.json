@@ -1,0 +1,165 @@
+{
+  "currentUser": {
+    "about": "Pasionat(ă) de lectură și schimburi de cărți.",
+    "name": "",
+    "fullName": "",
+    "username": "bianca",
+    "email": "bianca@example.com",
+    "phone": "+40 123 456 789",
+    "gender": "Masculin",
+    "birth": "1998-05-14",
+    "location": "București",
+    "country": "România",
+    "city": "București",
+    "showCity": true,
+    "language": "Română",
+    "vacation": false,
+    "google": false,
+    "facebook": false,
+    "address": {
+      "name": "",
+      "street": "Str. Bibliotecii nr. 12",
+      "zip": "010101",
+      "city": "București"
+    },
+    "shipHome": true,
+    "shipPoint": true,
+    "notif": {
+      "news": true,
+      "marketing": false,
+      "messages": true,
+      "feedback": true,
+      "favorites": true,
+      "email": true,
+      "limit": "Până la 5 notificări"
+    },
+    "privacy": {
+      "showOnline": true,
+      "personalized": true,
+      "thirdParty": false
+    }
+  },
+  "communityUsers": [
+    {
+      "id": "u-3k9m2x",
+      "username": "ana_p",
+      "name": "Ana Popescu",
+      "about": "Iubesc romanele de dragoste și cărțile în limbi străine. Schimb cu drag!",
+      "location": "București",
+      "avatarColor": "#043c25",
+      "rating": 5.0,
+      "swapsCount": 24,
+      "emailVerified": true
+    },
+    {
+      "id": "u-7f4n1q",
+      "username": "mihai.d",
+      "name": "Mihai Dumitrescu",
+      "about": "Cititor pasionat de biografii și cărți de istorie. Cărțile au o viață mai lungă decât noi.",
+      "location": "Cluj-Napoca",
+      "avatarColor": "#1b4332",
+      "rating": 4.9,
+      "swapsCount": 16,
+      "emailVerified": true
+    },
+    {
+      "id": "u-2a8v5r",
+      "username": "elena_v",
+      "name": "Elena Vasilescu",
+      "about": "Pasionată de dezvoltare personală și lectură în general. Cărțile sunt cel mai bun prieten al meu.",
+      "location": "Iași",
+      "avatarColor": "#40916c",
+      "rating": 5.0,
+      "swapsCount": 32,
+      "emailVerified": true
+    },
+    {
+      "id": "u-5p0w8t",
+      "username": "radu_m",
+      "name": "Radu Marinescu",
+      "about": "Fan Sci-Fi și fantasy. Dacă ai ceva de Asimov sau Herbert, suntem prieteni.",
+      "location": "Timișoara",
+      "avatarColor": "#2d6a4f",
+      "rating": 4.7,
+      "swapsCount": 14,
+      "emailVerified": false
+    },
+    {
+      "id": "u-8c1y6d",
+      "username": "kriszi_09",
+      "name": "Krisztina B.",
+      "about": "Citesc tot ce îmi cade în mână. Brașovul are nevoie de mai mulți cititori!",
+      "location": "Brașov",
+      "avatarColor": "#0b5d3b",
+      "rating": 5.0,
+      "swapsCount": 40,
+      "emailVerified": true
+    },
+    {
+      "id": "u-1h6z3s",
+      "username": "ginaginutza003",
+      "name": "Georgiana Ionescu",
+      "about": "Citesc de când eram mică. Favorite: ficțiune și thriller. Schimb rapid și ambalaj îngrijit.",
+      "location": "Constanța",
+      "avatarColor": "#285943",
+      "rating": 4.8,
+      "swapsCount": 19,
+      "emailVerified": true
+    },
+    {
+      "id": "u-9b5e2j",
+      "username": "alexandrub201",
+      "name": "Alexandru Barbu",
+      "about": "Thriller-uri și romane psihologice. Dacă îți place Gone Girl, ne înțelegem bine.",
+      "location": "București",
+      "avatarColor": "#52b788",
+      "rating": 4.9,
+      "swapsCount": 11,
+      "emailVerified": true
+    },
+    {
+      "id": "u-4l7u0f",
+      "username": "inimadecarte",
+      "name": "Inima De Carte",
+      "about": "Biblioteca mea personală are peste 300 de cărți. Schimb activ de ani de zile!",
+      "location": "Sibiu",
+      "avatarColor": "#74c69d",
+      "rating": 5.0,
+      "swapsCount": 55,
+      "emailVerified": true
+    },
+    {
+      "id": "u-6r2o4g",
+      "username": "dariaiancu33",
+      "name": "Daria Iancu",
+      "about": "Licee și facultate — mai am manuale bune de dat mai departe. Caut și romane ușoare.",
+      "location": "Craiova",
+      "avatarColor": "#1b4332",
+      "rating": 4.8,
+      "swapsCount": 15,
+      "emailVerified": false
+    },
+    {
+      "id": "u-0q3i9h",
+      "username": "deea_44",
+      "name": "Andreea Stoica",
+      "about": "Îmi place istoria și non-ficțiunea. Sapiens mi-a schimbat perspectiva. Recomand oricui!",
+      "location": "București",
+      "avatarColor": "#043c25",
+      "rating": 4.9,
+      "swapsCount": 28,
+      "emailVerified": true
+    },
+    {
+      "id": "u-5m8k1b",
+      "username": "margo4real",
+      "name": "Margareta C.",
+      "about": "Harry Potter forever! Schimb orice carte din lume contra unui volum din serie.",
+      "location": "Cluj-Napoca",
+      "avatarColor": "#2d6a4f",
+      "rating": 5.0,
+      "swapsCount": 36,
+      "emailVerified": true
+    }
+  ]
+}

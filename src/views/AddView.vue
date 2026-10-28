@@ -1,15 +1,15 @@
 <template>
   <div class="bg-[#f5f6f5] py-8" data-testid="add-page">
     <form @submit.prevent="submit" class="mx-auto flex max-w-[808px] flex-col gap-4 px-3">
-      <h1 class="text-2xl font-semibold">Adaugă o carte</h1>
+      <h1 class="text-2xl font-semibold">{{ $t('add.title') }}</h1>
 
       <section class="flex flex-col gap-5 bg-white p-6 sm:flex-row">
         <div class="aspect-[2/3] w-full shrink-0 overflow-hidden rounded-sm sm:w-44" data-testid="add-cover-preview">
           <BookCover :book="{ ...form, title: form.title || 'Titlul cărții' }" />
         </div>
         <div class="flex-1">
-          <p class="font-medium">Copertă</p>
-          <p class="mt-1 text-sm text-muted">Alege o imagine pentru copertă sau folosește varianta implicită.</p>
+          <p class="font-medium">{{ $t('add.cover') }}</p>
+          <p class="mt-1 text-sm text-muted">{{ $t('add.cover_desc') }}</p>
 
           <div class="mt-4 flex flex-wrap items-start gap-3" data-testid="image-gallery">
             <div v-for="(img, i) in form.images" :key="i"
@@ -22,13 +22,13 @@
             </div>
             <label class="flex h-20 w-16 cursor-pointer flex-col items-center justify-center gap-1 rounded-md border-2 border-dashed border-line-2 text-brand hover:border-brand hover:bg-brand-soft/40" data-testid="pick-image-label">
               <AppIcon name="plus" :size="20" />
-              <span class="text-[10px] font-semibold">Adaugă imagini</span>
+              <span class="text-[10px] font-semibold">{{ $t('add.add_images') }}</span>
               <input ref="fileInput" type="file" accept="image/*" multiple class="hidden" @change="onFiles" data-testid="pick-image-input" />
             </label>
           </div>
 
           <p v-if="!form.images.length" class="mt-3 flex items-center gap-2 text-xs text-muted" data-testid="default-cover-hint">
-            <AppIcon name="info" :size="14" /> Folosește coperta implicită (verde)
+            <AppIcon name="info" :size="14" /> {{ $t('add.default_cover_hint') }}
           </p>
         </div>
       </section>
@@ -45,13 +45,13 @@
         <label v-for="s in selects" :key="s.key" class="flex flex-col gap-2 border-b border-line py-5 last:border-0 sm:flex-row sm:items-center">
           <span class="w-56 shrink-0">{{ s.label }}</span>
           <select v-model="form[s.key]" :data-testid="`add-${s.key}-select`" class="flex-1 border-b border-line bg-white py-1 outline-none focus:border-brand">
-            <option v-for="o in s.options" :key="o">{{ o }}</option>
+            <option v-for="o in s.options" :key="o" :value="o">{{ s.prefix ? $t(`${s.prefix}${o}`, o) : o }}</option>
           </select>
         </label>
       </section>
 
       <div class="flex justify-end">
-        <button class="rounded bg-brand px-8 py-2.5 text-white transition-colors hover:bg-brand-dark" data-testid="add-submit-btn">Publică cartea</button>
+        <button class="rounded bg-brand px-8 py-2.5 text-white transition-colors hover:bg-brand-dark" data-testid="add-submit-btn">{{ $t('add.publish') }}</button>
       </div>
     </form>
   </div>
@@ -60,11 +60,13 @@
 <script setup>
 import { reactive, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import BookCover from '@/components/BookCover.vue'
 import AppIcon from '@/components/AppIcon.vue'
 import { addBook, categories, conditions, readImage, DEFAULT_COVER_COLOR } from '@/stores/books'
 
 const router = useRouter()
+const { t } = useI18n()
 
 const form = reactive({
   title: '', author: '', description: '', wants: '',
@@ -73,17 +75,17 @@ const form = reactive({
   images: [],
 })
 
-const textFields = [
-  { key: 'title', label: 'Titlul cărții', placeholder: 'Maitreyi', required: true },
-  { key: 'author', label: 'Autor', placeholder: 'Mircea Eliade', required: true },
-  { key: 'description', label: 'Descriere', placeholder: '...', area: true },
-  { key: 'wants', label: 'Caută în schimb', placeholder: '...', required: true },
-]
-const selects = [
-  { key: 'category', label: 'Gen', options: categories },
-  { key: 'condition', label: 'Stare', options: conditions },
-  { key: 'language', label: 'Limbă', options: ['Română', 'Engleză', 'Franceză', 'Germană', 'Spaniolă'] },
-]
+const textFields = computed(() => [
+  { key: 'title', label: t('add.fields.title'), placeholder: t('add.fields.title_placeholder'), required: true },
+  { key: 'author', label: t('add.fields.author'), placeholder: t('add.fields.author_placeholder'), required: true },
+  { key: 'description', label: t('add.fields.description'), placeholder: t('add.fields.description_placeholder'), area: true },
+  { key: 'wants', label: t('add.fields.wants'), placeholder: t('add.fields.wants_placeholder'), required: true },
+])
+const selects = computed(() => [
+  { key: 'category', label: t('add.fields.category'), options: categories, prefix: 'category.' },
+  { key: 'condition', label: t('add.fields.condition'), options: conditions, prefix: 'condition.' },
+  { key: 'language', label: t('add.fields.language'), options: ['Română', 'Engleză', 'Franceză', 'Germană', 'Spaniolă'] },
+])
 
 const onFiles = async (e) => {
   const files = Array.from(e.target.files || [])

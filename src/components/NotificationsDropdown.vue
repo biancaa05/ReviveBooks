@@ -2,7 +2,7 @@
   <div class="absolute right-0 top-12 w-[300px] border border-line bg-white shadow-[0_4px_16px_rgba(0,0,0,0.15)]" data-testid="notifications-dropdown">
     <div v-if="!store.notifications.length" class="flex flex-col items-center gap-4 py-9 text-ink">
       <AppIcon name="bell" :size="40" class="text-brand" />
-      <p class="text-[15px]">Nicio notificare încă</p>
+      <p class="text-[15px]">{{ $t('notif.empty') }}</p>
     </div>
     <template v-else>
       <router-link v-for="n in store.notifications.slice(0, 3)" :key="n.id" :to="`/book/${n.bookId}`" @click="$emit('close')"
@@ -14,7 +14,7 @@
         </span>
       </router-link>
       <router-link to="/alerts" @click="$emit('close')" class="block py-3 text-center text-sm text-brand hover:underline" data-testid="see-all-notifications">
-        Vezi toate notificările
+        {{ $t('notif.see_all') }}
       </router-link>
     </template>
   </div>

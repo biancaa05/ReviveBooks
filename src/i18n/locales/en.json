@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "home": "Home",
+    "favorites": "Favorites",
+    "add": "Add",
+    "chats": "Messages",
+    "profile": "Profile"
+  },
+  "header": {
+    "catalog": "Catalog",
+    "search_placeholder": "Search books",
+    "register": "Sign up",
+    "login": "Log in",
+    "add_book": "Add book",
+    "my_profile": "My profile",
+    "my_favorites": "Favorite books",
+    "my_swaps": "My swaps",
+    "premium": "Premium",
+    "settings": "Settings",
+    "logout": "Log out"
+  },
+  "category": {
+    "Ficțiune": "Fiction",
+    "Sci-Fi & Fantasy": "Sci-Fi & Fantasy",
+    "Thriller": "Thriller",
+    "Romance": "Romance",
+    "Dezvoltare personală": "Personal Growth",
+    "Biografii": "Biographies",
+    "Istorie": "History",
+    "Copii": "Children",
+    "Manuale": "Textbooks",
+    "Limbi străine": "Foreign Languages"
+  },
+  "condition": {
+    "Nouă": "New",
+    "Ca nouă": "Like New",
+    "Foarte bună": "Very Good",
+    "Bună": "Good",
+    "Acceptabilă": "Acceptable"
+  },
+  "home": {
+    "hero_title": "Ready to free up your bookshelf?",
+    "hero_cta": "Log in / Sign up",
+    "hero_how": "Learn how it works",
+    "hero_how_text": "Add books you have read, choose a book you love, and propose a swap. No money involved — just books finding a new reader.",
+    "banner_text": "Swaps are free — shipping costs are applied at checkout",
+    "clear_filters": "Clear filters",
+    "no_results": "No books found. Try another search.",
+    "results_for": "Results for “{q}”"
+  },
+  "book": {
+    "promoted": "Promoted",
+    "wants": "Wants",
+    "swap": "Swap",
+    "free": "free",
+    "top": "Top"
+  },
+  "book_view": {
+    "home": "Home",
+    "free_swap": "Free swap",
+    "genre": "Genre",
+    "condition": "Condition",
+    "language": "Language",
+    "year": "Publication year",
+    "uploaded": "Uploaded",
+    "wants_in_return": "Wants in return:",
+    "what_book_offer": "Which book do you offer in return?",
+    "send_proposal": "Send proposal",
+    "propose_swap": "Propose a swap",
+    "send_message": "Send a message",
+    "added_to_fav": "Added to favorites",
+    "favorite": "Favorite",
+    "other_books": "Other books from",
+    "not_found": "Book not found."
+  },
+  "chats": {
+    "inbox": "Inbox",
+    "back": "Back",
+    "free_swap": "Free swap",
+    "type_placeholder": "Write a message here",
+    "add_book": "Add a book"
+  },
+  "fav": {
+    "recommended": "Recommended",
+    "club_title": "Book club of the month",
+    "club_desc": "Discover the most swapped books in the ReviveBooks community.",
+    "title": "Books added to Favorites",
+    "empty": "You have no favorite books yet.",
+    "discover": "Discover books"
+  },
+  "add": {
+    "title": "Add a book",
+    "cover": "Cover",
+    "cover_desc": "Choose an image for the cover or use the default one.",
+    "add_images": "Add images",
+    "default_cover_hint": "Use the default cover (green)",
+    "publish": "Publish book",
+    "fields": {
+      "title": "Book title",
+      "title_placeholder": "e.g. Sapiens",
+      "author": "Author",
+      "author_placeholder": "e.g. Yuval Noah Harari",
+      "description": "Description",
+      "description_placeholder": "Describe book condition, edition details, etc.",
+      "wants": "What book do you want in exchange?",
+      "wants_placeholder": "e.g. Homo Deus or any history book",
+      "category": "Category",
+      "condition": "Condition",
+      "language": "Language",
+      "year": "Publication year"
+    }
+  },
+  "footer": {
+    "privacy_center": "Privacy Center",
+    "cookie_policy": "Cookie Policy",
+    "cookie_settings": "Cookie Settings",
+    "terms": "Terms & Conditions",
+    "platform": "Our Platform"
+  },
+  "notif": {
+    "empty": "No notifications yet",
+    "see_all": "See all notifications",
+    "title": "Notifications"
+  },
+    "user_profile": {
+    "ratings": "ratings",
+    "swaps_done": "swaps done",
+    "email_verified": "Email verified",
+    "tab_books": "Books",
+    "tab_reviews": "Reviews",
+    "books_available": "books available for swap",
+    "no_books": "This user has no books available at the moment.",
+    "no_reviews": "There are no reviews yet.",
+    "not_found": "User not found.",
+    "back_home": "Back to home"
+  },
+  "auth": {
+    "welcome_back": "Welcome back!",
+    "join_us": "Join us and swap books",
+    "continue_with": "Continue with {provider}",
+    "or_with_email": "Or {action} with",
+    "email": "email",
+    "have_account": "Already have an account?",
+    "no_account": "Don't have a ReviveBooks account?",
+    "login": "Log in",
+    "register": "Sign up",
+    "username": "Username",
+    "email_or_user": "Email or username",
+    "password": "Password",
+    "terms_agree": "I accept the ReviveBooks Terms & Conditions and Privacy Policy.",
+    "continue_btn": "Continue",
+    "forgot_password": "Forgot password?",
+    "reset_sent": "We sent a password reset link to your email."
+  }
+}

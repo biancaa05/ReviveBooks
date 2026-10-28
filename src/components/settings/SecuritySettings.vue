@@ -26,6 +26,6 @@ const rows = [
   { id: 'email', title: 'E-mail', text: 'Actualizează-ți adresa de e-mail.', detail: 'Poți modifica e-mailul din Setări cont.' },
   { id: 'password', title: 'Parolă', text: 'Protejează-ți contul cu o parolă mai puternică.', detail: 'Ți-am trimis un link de resetare pe e-mail.' },
   { id: '2fa', title: 'Autentificare cu doi factori', text: 'Securizează-ți conectarea cu un pas simplu de verificare.', detail: 'Autentificarea cu doi factori este activă prin SMS.' },
-  { id: 'devices', title: 'Activitate de conectare', text: 'Gestionează dispozitivele pe care te conectezi.', detail: 'Conectat acum: Firefox · Linux · Brăila' },
+  { id: 'devices', title: 'Activitate de conectare', text: 'Gestionează dispozitivele pe care te conectezi.', detail: 'Conectat acum: Firefox · Linux · București' },
 ]
 </script>

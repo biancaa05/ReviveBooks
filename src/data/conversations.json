@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "user": "kriszi_09",
+    "bookId": 5,
+    "time": "acum 2 săptămâni",
+    "unread": true,
+    "messages": [
+      { "type": "system", "title": "Schimb propus", "time": "acum 2 săptămâni" },
+      { "type": "system", "title": "Schimb acceptat", "text": "Ați căzut de acord asupra schimbului.", "time": "acum 2 săptămâni" },
+      { "type": "system", "title": "Cărți expediate", "time": "acum 2 săptămâni" },
+      { "type": "system", "title": "Livrat", "time": "acum 2 săptămâni" },
+      { "type": "system", "title": "Feedback adăugat!", "text": "Îți mulțumim pentru feedback.", "time": "acum 2 săptămâni" },
+      { "type": "system", "title": "Finalizat", "text": "Îți mulțumim că faci schimb de cărți pe ReviveBooks.", "time": "acum 2 săptămâni", "cta": true }
+    ]
+  },
+  {
+    "id": 2,
+    "user": "ginaginutza003",
+    "bookId": 6,
+    "time": "acum 6 luni",
+    "messages": [
+      { "type": "them", "text": "Bună! Mai este disponibilă cartea?", "time": "acum 6 luni" },
+      { "type": "me", "text": "Da, încă e disponibilă. Ce ai propune la schimb?", "time": "acum 6 luni" },
+      { "type": "them", "text": "Baiatul cu pijamale în dungi pentru The Book Thief?", "time": "acum 6 luni" }
+    ]
+  },
+  {
+    "id": 3,
+    "user": "alexandrub201",
+    "bookId": 7,
+    "time": "acum 6 luni",
+    "messages": [
+      { "type": "them", "text": "Am și Gone Girl, facem schimbul?", "time": "acum 6 luni" }
+    ]
+  }
+]
+

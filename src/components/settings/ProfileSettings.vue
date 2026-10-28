@@ -54,7 +54,12 @@ import ToggleSwitch from './ToggleSwitch.vue'
 import SettingsSelect from './SettingsSelect.vue'
 import { store, readImage } from '@/stores/books'
 
-const cities = ['Brăila', 'București', 'Cluj-Napoca', 'Iași', 'Timișoara', 'Constanța', 'Brașov', 'Galați', 'Chișinău']
+const cities = [
+  'Alba', 'Arad', 'Argeș', 'Bacău', 'Bihor', 'Bistrița-Năsăud', 'Botoșani', 'Brașov', 'Brăila', 'București',
+  'Buzău', 'Călărași', 'Caraș-Severin', 'Cluj', 'Constanța', 'Covasna', 'Dâmbovița', 'Dolj', 'Galați', 'Giurgiu',
+  'Gorj', 'Hunedoara', 'Ialomița', 'Iași', 'Ilfov', 'Maramureș', 'Mehedinți', 'Mureș', 'Neamț', 'Olt', 'Prahova',
+  'Satu Mare', 'Sălaj', 'Sibiu', 'Suceava', 'Teleorman', 'Timiș', 'Tulcea', 'Vaslui', 'Vâlcea', 'Vrancea'
+]
 const editing = ref(false)
 const saved = ref(false)
 const onFile = async (e) => { const f = e.target.files[0]; if (f) store.avatar = await readImage(f, 300) }

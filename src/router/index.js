@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import BookView from '../views/BookView.vue'
 import AddView from '../views/AddView.vue'
 import ProfileView from '../views/ProfileView.vue'
+import UserProfileView from '../views/UserProfileView.vue'
 import AlertsView from '../views/AlertsView.vue'
 import ChatsView from '../views/ChatsView.vue'
 import FavoritesView from '../views/FavoritesView.vue'
@@ -25,6 +26,7 @@ const router = createRouter({
     { path: '/book/:id', name: 'book', component: BookView },
     { path: '/add', name: 'add', component: AddView },
     { path: '/profile', name: 'profile', component: ProfileView },
+    { path: '/user/:id', name: 'user', component: UserProfileView },
     { path: '/alerts', name: 'alerts', component: AlertsView },
     { path: '/chats', name: 'chats', component: ChatsView },
     { path: '/chat/:id', name: 'chat', component: ChatsView },

@@ -1,0 +1,33 @@
+{
+  "categories": [
+    "Ficțiune",
+    "Sci-Fi & Fantasy",
+    "Thriller",
+    "Romance",
+    "Dezvoltare personală",
+    "Biografii",
+    "Istorie",
+    "Copii",
+    "Manuale",
+    "Limbi străine"
+  ],
+  "conditions": [
+    "Nouă",
+    "Ca nouă",
+    "Foarte bună",
+    "Bună",
+    "Acceptabilă"
+  ],
+  "coverColors": [
+    "#043c25",
+    "#1b4332",
+    "#2d6a4f",
+    "#40916c",
+    "#52b788",
+    "#74c69d",
+    "#0b5d3b",
+    "#285943"
+  ],
+  "defaultCoverColor": "#043c25"
+}
+

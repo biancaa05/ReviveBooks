@@ -5,37 +5,37 @@
       <button v-if="step === 'email'" @click="step = 'choose'" class="absolute top-4 left-4 rotate-180 text-ink hover:text-brand" data-testid="auth-back-btn"><AppIcon name="arrow" :size="22" /></button>
 
       <template v-if="step === 'choose'">
-        <h2 class="mb-6 text-center text-2xl font-medium">{{ register ? 'Alătură-te și schimbă cărți' : 'Bine ai revenit!' }}</h2>
+        <h2 class="mb-6 text-center text-2xl font-medium">{{ register ? $t('auth.join_us') : $t('auth.welcome_back') }}</h2>
         <div class="flex flex-col gap-3">
           <button v-for="p in providers" :key="p.id" @click="social(p.id)" :data-testid="`auth-${p.id}-btn`"
             class="flex h-11 items-center justify-center gap-3 rounded border border-[#c9cccb] text-[15px] transition-colors hover:bg-[#f5f6f5]">
-            <span v-html="p.icon" class="h-5 w-5"></span> Continuă cu {{ p.label }}
+            <span v-html="p.icon" class="h-5 w-5"></span> {{ $t('auth.continue_with', { provider: p.label }) }}
           </button>
         </div>
         <p class="mt-6 text-center text-sm text-[#4d4d4d]">
-          Sau {{ register ? 'înregistrează-te' : 'conectează-te' }} cu
-          <button @click="step = 'email'" class="text-brand underline" data-testid="auth-email-link">e-mail</button>
+          {{ $t('auth.or_with_email', { action: register ? $t('auth.register').toLowerCase() : $t('auth.login').toLowerCase() }) }}
+          <button @click="step = 'email'" class="text-brand underline" data-testid="auth-email-link">{{ $t('auth.email') }}</button>
         </p>
         <p class="mt-6 text-center text-sm text-[#4d4d4d]">
-          {{ register ? 'Ai deja un cont?' : 'Nu ai un cont ReviveBooks?' }}
-          <button @click="register = !register" class="text-brand underline" data-testid="auth-toggle-mode">{{ register ? 'Conectează-te' : 'Înregistrează-te' }}</button>
+          {{ register ? $t('auth.have_account') : $t('auth.no_account') }}
+          <button @click="register = !register" class="text-brand underline" data-testid="auth-toggle-mode">{{ register ? $t('auth.login') : $t('auth.register') }}</button>
         </p>
       </template>
 
       <form v-else @submit.prevent="submit" class="flex flex-col gap-5" data-testid="auth-email-form">
-        <h2 class="mb-1 text-center text-2xl font-medium">{{ register ? 'Înregistrează-te cu e-mail' : 'Conectează-te' }}</h2>
-        <input v-if="register" v-model="form.username" required placeholder="Nume de utilizator" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-username-input" />
-        <input v-model="form.email" required type="email" :placeholder="register ? 'E-mail' : 'E-mail sau nume de utilizator'" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-email-input" />
-        <input v-model="form.password" required type="password" minlength="6" placeholder="Parolă" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-password-input" />
+        <h2 class="mb-1 text-center text-2xl font-medium">{{ register ? $t('auth.register') : $t('auth.login') }}</h2>
+        <input v-if="register" v-model="form.username" required :placeholder="$t('auth.username')" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-username-input" />
+        <input v-model="form.email" required type="email" :placeholder="register ? $t('auth.email') : $t('auth.email_or_user')" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-email-input" />
+        <input v-model="form.password" required type="password" minlength="6" :placeholder="$t('auth.password')" class="border-b border-line py-2 outline-none focus:border-brand" data-testid="auth-password-input" />
         <label v-if="register" class="flex gap-2 text-xs text-[#4d4d4d]">
           <input type="checkbox" required class="accent-brand" data-testid="auth-terms-checkbox" />
-          Accept Termenii și condițiile ReviveBooks și Politica de confidențialitate.
+          {{ $t('auth.terms_agree') }}
         </label>
         <button class="h-11 rounded bg-brand text-white transition-colors hover:bg-brand-dark" data-testid="auth-submit-btn">
-          {{ register ? 'Continuă' : 'Conectează-te' }}
+          {{ register ? $t('auth.continue_btn') : $t('auth.login') }}
         </button>
-        <button v-if="!register" type="button" @click="forgot = true" class="text-center text-sm text-brand underline" data-testid="auth-forgot-btn">Ai uitat parola?</button>
-        <p v-if="forgot" class="text-center text-xs text-muted">Ți-am trimis un link de resetare pe e-mail.</p>
+        <button v-if="!register" type="button" @click="forgot = true" class="text-center text-sm text-brand underline" data-testid="auth-forgot-btn">{{ $t('auth.forgot_password') }}</button>
+        <p v-if="forgot" class="text-center text-xs text-muted">{{ $t('auth.reset_sent') }}</p>
       </form>
     </div>
   </div>

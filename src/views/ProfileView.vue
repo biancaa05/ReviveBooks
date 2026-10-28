@@ -39,13 +39,10 @@ import { ref, computed } from 'vue'
 import AppIcon from '@/components/AppIcon.vue'
 import BookGrid from '@/components/BookGrid.vue'
 import { store } from '@/stores/books'
+import reviews from '@/data/reviews.json'
 
 const tabs = ['Cărți', 'Evaluări']
 const tab = ref('Cărți')
 const swaps = 8
 const mine = computed(() => store.books.filter((b) => b.owner === store.me))
-const reviews = [
-  { user: 'kriszi_09', text: 'Schimb rapid, cartea exact ca în descriere. Mulțumesc!' },
-  { user: 'deea_44', text: 'Foarte comunicativă, recomand.' },
-]
 </script>

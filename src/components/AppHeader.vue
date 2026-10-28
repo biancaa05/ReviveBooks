@@ -9,15 +9,15 @@
         <form @submit.prevent="search" class="relative hidden h-9 flex-1 items-center rounded-md bg-field md:flex md:ml-8" data-testid="search-form">
           <button type="button" @click="open = open === 'catalog' ? '' : 'catalog'" data-testid="catalog-dropdown-btn"
             class="flex h-full items-center gap-1 border-r border-[#d6d9d8] px-4 text-[15px] text-[#4d4d4d] hover:bg-[#e4e7e6] rounded-l-md">
-            Catalog <AppIcon name="caret" :size="18" fill />
+            {{ $t('header.catalog') }} <AppIcon name="caret" :size="18" fill />
           </button>
           <AppIcon name="search" :size="18" class="ml-3 text-muted" />
-          <input v-model="q" :placeholder="'Caută cărți'" data-testid="search-input"
+          <input v-model="q" :placeholder="$t('header.search_placeholder')" data-testid="search-input"
             class="h-full flex-1 bg-transparent px-2 text-[15px] outline-none placeholder:text-muted" />
           <AppIcon name="camera" :size="20" class="mr-3 text-brand" />
           <div v-if="open === 'catalog'" class="absolute top-11 left-0 w-64 rounded-md border border-line bg-white py-2 shadow-lg" data-testid="catalog-menu">
             <router-link v-for="c in categories" :key="c" :to="{ path: '/', query: { cat: c } }" @click="open = ''"
-              class="block px-4 py-2 text-sm hover:bg-brand-soft">{{ c }}</router-link>
+              class="block px-4 py-2 text-sm hover:bg-brand-soft">{{ $t(`category.${c}`) }}</router-link>
           </div>
         </form>
 
@@ -46,33 +46,33 @@
                 <AppIcon name="caret" :size="14" fill class="text-muted" />
               </button>
               <div v-if="open === 'user'" class="absolute right-0 top-11 w-56 rounded-md border border-line bg-white py-2 shadow-lg" data-testid="user-menu">
-                <router-link to="/profile" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-profile">Profilul meu</router-link>
-                <router-link to="/favorites" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-favorites">Cărți favorite</router-link>
-                <router-link to="/chats" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-swaps">Schimburile mele</router-link>
+                <router-link to="/profile" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-profile">{{ $t('header.my_profile') }}</router-link>
+                <router-link to="/favorites" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-favorites">{{ $t('header.my_favorites') }}</router-link>
+                <router-link to="/chats" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-swaps">{{ $t('header.my_swaps') }}</router-link>
                 <router-link to="/premium" @click="open = ''" class="flex items-center justify-between px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-premium">
                   <span class="flex items-center gap-2">
-                    <AppIcon name="star" :size="16" fill class="text-[#ffb703]" /> Premium
+                    <AppIcon name="star" :size="16" fill class="text-[#ffb703]" /> {{ $t('header.premium') }}
                   </span>
                   <span v-if="store.isPremium" class="rounded bg-[#ffb703] px-1.5 py-0.5 text-[10px] font-bold text-black">PRO</span>
                 </router-link>
-                <router-link to="/settings" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-settings">Setări</router-link>
-                <button @click="logout" class="block w-full px-4 py-2 text-left text-sm text-[#e5484d] hover:bg-brand-soft" data-testid="logout-btn">Deconectare</button>
+                <router-link to="/settings" @click="open = ''" class="block px-4 py-2 text-sm hover:bg-brand-soft" data-testid="menu-settings">{{ $t('header.settings') }}</router-link>
+                <button @click="logout" class="block w-full px-4 py-2 text-left text-sm text-[#e5484d] hover:bg-brand-soft" data-testid="logout-btn">{{ $t('header.logout') }}</button>
               </div>
             </div>
           </template>
           
           <router-link v-else to="/login" data-testid="login-btn"
             class="rounded border border-brand px-3 py-1.5 text-[13px] text-brand transition-colors hover:bg-brand-soft">
-            Înregistrare <span class="mx-0.5 opacity-50">|</span> Autentificare
+            {{ $t('header.register') }} <span class="mx-0.5 opacity-50">|</span> {{ $t('header.login') }}
           </router-link>
 
           <router-link to="/add" class="ml-1 rounded bg-brand px-3 py-2 text-[13px] text-white transition-colors hover:bg-brand-dark" data-testid="header-add-book-btn">
-            Adaugă carte
+            {{ $t('header.add_book') }}
           </router-link>
           <router-link to="/faq" class="hidden p-2 text-[#4d4d4d] hover:text-brand md:block lg:ml-3" data-testid="header-help-btn">
             <AppIcon name="help" :size="26" />
           </router-link>
-          <button @click="toggleLocale" class="hidden items-center text-sm font-medium text-[#4d4d4d] hover:text-brand md:flex lg:ml-4" data-testid="header-lang-btn">
+          <button @click="toggleLocale" class="flex items-center text-sm font-medium text-[#4d4d4d] hover:text-brand ml-1 lg:ml-4" data-testid="header-lang-btn">
             {{ locale.toUpperCase() }} <AppIcon name="caret" :size="18" fill />
           </button>
         </div>
@@ -83,7 +83,7 @@
       <div class="mx-auto flex max-w-[1240px] gap-1 overflow-x-auto px-3">
         <router-link v-for="c in categories" :key="c" :to="{ path: '/', query: { cat: c } }" :data-testid="`category-link-${c}`"
           :class="['whitespace-nowrap px-4 py-3 text-[15px] transition-colors hover:text-brand', route.query.cat === c ? 'text-brand font-medium' : 'text-[#4d4d4d]']">
-          {{ c }}
+          {{ $t(`category.${c}`) }}
         </router-link>
       </div>
     </nav>
@@ -95,8 +95,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import AppIcon from './AppIcon.vue'
 import NotificationsDropdown from './NotificationsDropdown.vue'
 import AuthModal from './settings/AuthModal.vue'
@@ -104,13 +105,25 @@ import { store, categories, logoutUser } from '@/stores/books'
 
 const route = useRoute()
 const router = useRouter()
+const { locale } = useI18n()
 const q = ref('')
 const open = ref('')
-const locale = ref('ro')
 const unread = computed(() => store.conversations.filter((c) => c.unread).length)
+
+watch(
+  () => store.settings.language,
+  (lang) => {
+    if (lang === 'English' && locale.value !== 'en') locale.value = 'en'
+    else if (lang === 'Română' && locale.value !== 'ro') locale.value = 'ro'
+  },
+  { immediate: true },
+)
 
 const search = () => { open.value = ''; router.push({ path: '/', query: q.value ? { q: q.value } : {} }) }
 const toggleNotif = () => { open.value = open.value === 'notif' ? '' : 'notif'; store.readNotifications = true }
-const toggleLocale = () => { locale.value = locale.value === 'ro' ? 'en' : 'ro' }
+const toggleLocale = () => {
+  locale.value = locale.value === 'ro' ? 'en' : 'ro'
+  store.settings.language = locale.value === 'ro' ? 'Română' : 'English'
+}
 const logout = () => { logoutUser(); open.value = ''; router.push('/') }
 </script>

@@ -1,0 +1,155 @@
+{
+  "nav": {
+    "home": "Acasă",
+    "favorites": "Favorite",
+    "add": "Adaugă",
+    "chats": "Mesaje",
+    "profile": "Profil"
+  },
+  "header": {
+    "catalog": "Catalog",
+    "search_placeholder": "Caută cărți",
+    "register": "Înregistrare",
+    "login": "Autentificare",
+    "add_book": "Adaugă carte",
+    "my_profile": "Profilul meu",
+    "my_favorites": "Cărți favorite",
+    "my_swaps": "Schimburile mele",
+    "premium": "Premium",
+    "settings": "Setări",
+    "logout": "Deconectare"
+  },
+  "category": {
+    "Ficțiune": "Ficțiune",
+    "Sci-Fi & Fantasy": "Sci-Fi & Fantasy",
+    "Thriller": "Thriller",
+    "Romance": "Romance",
+    "Dezvoltare personală": "Dezvoltare personală",
+    "Biografii": "Biografii",
+    "Istorie": "Istorie",
+    "Copii": "Copii",
+    "Manuale": "Manuale",
+    "Limbi străine": "Limbi străine"
+  },
+  "condition": {
+    "Nouă": "Nouă",
+    "Ca nouă": "Ca nouă",
+    "Foarte bună": "Foarte bună",
+    "Bună": "Bună",
+    "Acceptabilă": "Acceptabilă"
+  },
+  "home": {
+    "hero_title": "Ești gata să-ți eliberezi raftul de cărți?",
+    "hero_cta": "Conectează-te/Înregistrează-te",
+    "hero_how": "Află cum funcționează",
+    "hero_how_text": "Adaugi cărțile pe care le-ai citit, alegi o carte care îți place și propui un schimb. Fără bani — doar cărți care își găsesc un nou cititor.",
+    "banner_text": "Schimburile sunt gratuite — costurile de expediere sunt aplicate la check-out",
+    "clear_filters": "Șterge filtrele",
+    "no_results": "Nu am găsit nicio carte. Încearcă altă căutare.",
+    "results_for": "Rezultate pentru „{q}”"
+  },
+  "book": {
+    "promoted": "Promovat",
+    "wants": "Vrea",
+    "swap": "Schimb",
+    "free": "gratuit",
+    "top": "Top"
+  },
+  "book_view": {
+    "home": "Acasă",
+    "free_swap": "Schimb gratuit",
+    "genre": "Gen",
+    "condition": "Stare",
+    "language": "Limba",
+    "year": "An apariție",
+    "uploaded": "Încărcat",
+    "wants_in_return": "Vrea în schimb:",
+    "what_book_offer": "Ce carte oferi în schimb?",
+    "send_proposal": "Trimite propunerea",
+    "propose_swap": "Propune un schimb",
+    "send_message": "Trimite un mesaj",
+    "added_to_fav": "Adăugată la favorite",
+    "favorite": "Favorite",
+    "other_books": "Alte cărți de la",
+    "not_found": "Cartea nu a fost găsită."
+  },
+  "chats": {
+    "inbox": "Mesaje primite",
+    "back": "Înapoi",
+    "free_swap": "Schimb gratuit",
+    "type_placeholder": "Scrie un mesaj aici",
+    "add_book": "Adaugă o carte"
+  },
+  "fav": {
+    "recommended": "Recomandat",
+    "club_title": "Clubul de lectură al lunii",
+    "club_desc": "Descoperă cele mai schimbate cărți din comunitatea ReviveBooks.",
+    "title": "Cărți adăugate în Favorite",
+    "empty": "Nu ai încă nicio carte favorită.",
+    "discover": "Descoperă cărți"
+  },
+  "add": {
+    "title": "Adaugă o carte",
+    "cover": "Copertă",
+    "cover_desc": "Alege o imagine pentru copertă sau folosește varianta implicită.",
+    "add_images": "Adaugă imagini",
+    "default_cover_hint": "Folosește coperta implicită (verde)",
+    "publish": "Publică cartea",
+    "fields": {
+      "title": "Titlul cărții",
+      "title_placeholder": "ex. Sapiens",
+      "author": "Autor",
+      "author_placeholder": "ex. Yuval Noah Harari",
+      "description": "Descriere",
+      "description_placeholder": "Descrie starea cărții, detalii despre ediție etc.",
+      "wants": "Ce carte dorești la schimb?",
+      "wants_placeholder": "ex. Homo Deus sau orice carte de istorie",
+      "category": "Categorie",
+      "condition": "Stare",
+      "language": "Limbă",
+      "year": "Anul apariției"
+    }
+  },
+  "footer": {
+    "privacy_center": "Centru de confidențialitate",
+    "cookie_policy": "Politica privind modulele cookie",
+    "cookie_settings": "Setări pentru modulele cookie",
+    "terms": "Termeni și condiții",
+    "platform": "Platforma noastră"
+  },
+  "notif": {
+    "empty": "Nicio notificare încă",
+    "see_all": "Vezi toate notificările",
+    "title": "Notificări"
+  },
+  "user_profile": {
+    "ratings": "evaluări",
+    "swaps_done": "schimburi finalizate",
+    "email_verified": "E-mail verificat",
+    "tab_books": "Cărți",
+    "tab_reviews": "Evaluări",
+    "books_available": "cărți disponibile pentru schimb",
+    "no_books": "Acest utilizator nu are cărți disponibile momentan.",
+    "no_reviews": "Nu există evaluări deocamdată.",
+    "not_found": "Utilizatorul nu a fost găsit.",
+    "back_home": "Înapoi acasă"
+  },
+  "auth": {
+    "welcome_back": "Bine ai revenit!",
+    "join_us": "Alătură-te și schimbă cărți",
+    "continue_with": "Continuă cu {provider}",
+    "or_with_email": "Sau {action} cu",
+    "email": "e-mail",
+    "have_account": "Ai deja un cont?",
+    "no_account": "Nu ai un cont ReviveBooks?",
+    "login": "Conectează-te",
+    "register": "Înregistrează-te",
+    "username": "Nume de utilizator",
+    "email_or_user": "E-mail sau nume de utilizator",
+    "password": "Parolă",
+    "terms_agree": "Accept Termenii și condițiile ReviveBooks și Politica de confidențialitate.",
+    "continue_btn": "Continuă",
+    "forgot_password": "Ai uitat parola?",
+    "reset_sent": "Ți-am trimis un link de resetare pe e-mail."
+  }
+}

@@ -7,7 +7,8 @@
     <AppFooter />
     <nav class="fixed inset-x-0 bottom-0 z-50 flex h-14 items-center justify-around border-t border-line bg-white md:hidden" data-testid="mobile-nav">
       <router-link v-for="l in links" :key="l.to" :to="l.to" class="flex flex-col items-center text-[11px] text-muted" active-class="!text-brand">
-        <AppIcon :name="l.icon" :size="22" />{ (l.label) }
+        <AppIcon :name="l.icon" :size="22" />
+        <span>{{ $t(l.label) }}</span>
       </router-link>
     </nav>
   </div>
