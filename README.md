@@ -1,44 +1,84 @@
-# ReviveBooks
+# 📚 ReviveBooks – Platformă de Schimb de Cărți Între Cititori
 
-This template should help get you started developing with Vue 3 in Vite.
+**ReviveBooks** este o aplicație web modernă de tip marketplace/comunitate, dedicată pasionaților de lectură care vor să ofere o a doua viață cărților din bibliotecile personale prin intermediul schimbului direct.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## ✨ Caracteristici principale
 
-## Recommended Browser Setup
+- **Explorare și căutare avansată:** filtrare rapidă a cărților după categorii (Ficțiune, Dezvoltare Personală, Sci-Fi etc.) și căutare dinamică după titlu, autor sau gen.
+- **Sistem de favorite:** posibilitatea de a adăuga cărți la favorite pentru a le urmări mai târziu.
+- **Detalii complete și previzualizare:** pagină dedicată pentru fiecare carte, incluzând starea fizică și profilul utilizatorului care a postat-o.
+- **Profiluri de utilizator:** vizualizarea raftului și a recenziilor altor cititori din comunitate.
+- **Chat și livrare:** cameră de chat integrată între utilizatori și flux interactiv de confirmare a schimbului, urmat de generarea detaliilor de livrare / AWB.
+- **Adăugare / editare anunțuri:** formulare intuitive pentru publicarea sau modificarea cărților puse la schimb.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Customize configuration
+## 🛠️ Tehnologii folosite
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+| Categorie | Tehnologie |
+| :--- | :--- |
+| Framework frontend | [Vue.js](https://vuejs.org/) (Composition & Options API) + Vue Router |
+| Styling | [Tailwind CSS](https://tailwindcss.com/) – design modern, curat și responsive |
+| Iconițe | [`lucide-vue-next`](https://lucide.dev/) |
+| Build tool | [Vite](https://vitejs.dev/) |
 
-## Project Setup
+---
 
-```sh
+## 📱 Previzualizare
+
+| Ecranul principal (Home) | Detalii carte & profil |
+| :---: | :---: |
+| ![Home Screen](URL_POZA_ACASA) | ![Book Detail](URL_POZA_DETALII) |
+
+| Camera de chat | Formular livrare / adăugare |
+| :---: | :---: |
+| ![Chat Screen](URL_POZA_CHAT) | ![Add Book](URL_POZA_ADAUGA) |
+
+> 💡 Înlocuiește `URL_POZA_*` cu linkuri directe către imagini sau cu căi relative, de exemplu `./screenshots/home.png`.
+
+---
+
+## 🚀 Cum rulezi aplicația local
+
+### Cerințe
+
+- [Node.js](https://nodejs.org/) (versiunea LTS recomandată)
+- npm
+
+### 1. Clonează repository-ul
+
+```bash
+git clone https://github.com/nume-utilizator/ReviveBooks.git
+cd ReviveBooks
+```
+
+### 2. Instalează dependențele
+
+```bash
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. Pornește serverul de dezvoltare
 
-```sh
-npm run dev
+```bash
+npm run dev -- --host
 ```
 
-### Compile and Minify for Production
+- Aplicația rulează implicit la adresa: `http://localhost:3000`
+- Pentru a o accesa de pe telefon (în aceeași rețea Wi-Fi), folosește adresa **Network** afișată în terminal, de exemplu `http://192.168.x.x:3000`.
 
-```sh
+### 4. Construiește pentru producție
+
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+Fișierele optimizate vor fi generate în folderul `dist/`.
 
-```sh
-npm run lint
-```
+---
+
+## 📄 Licență
+
+Acest proiect este dezvoltat în scop educativ și pentru portofoliu personal.
